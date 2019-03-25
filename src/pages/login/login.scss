@@ -1,0 +1,18 @@
+.botones{
+    margin-top: 15px;
+}
+
+.botones:hover{
+  cursor: pointer;
+}
+
+#clearButton{
+  border: solid 1px;
+  border-color: #488aff;
+}
+
+error{
+  > div{
+    background-color: red !important;
+  }
+}
