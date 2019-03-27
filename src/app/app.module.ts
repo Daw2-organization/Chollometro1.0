@@ -10,10 +10,13 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { firebaseConfig } from "./firebase.info";
+import { firebaseConfig } from "./firebase.config";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {ChollosPage} from "../pages/chollos/chollos";
+import {UploadPage} from "../pages/upload/upload";
+import {LoginPage} from "../pages/login/login";
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ChollosPage,
+    UploadPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ChollosPage,
+    UploadPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
