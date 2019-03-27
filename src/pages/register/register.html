@@ -6,15 +6,23 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item>
-    <ion-label floating>E-mail</ion-label>
-    <ion-input type="text" [(ngModel)]="user.email"></ion-input>
-  </ion-item>
+  <form (ngSubmit)="register(user)">
+    <ion-item>
+      <ion-label floating>E-mail</ion-label>
+      <ion-input type="text" [(ngModel)]="user.email" name="email"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Password</ion-label>
-    <ion-input type="password" [(ngModel)]="user.password"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
+    </ion-item>
 
-  <button ion-button block (click)="register(user)" class="botones">Register</button>
+    <ion-item>
+      <ion-label floating>Password Confirmation</ion-label>
+      <ion-input type="password" [(ngModel)]="user.passwordConfirm" name="passwordConfirm"></ion-input>
+    </ion-item>
+
+    <button ion-button block class="botones" type="submit">Register</button>
+  </form>
+
 </ion-content>

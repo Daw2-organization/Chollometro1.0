@@ -28,10 +28,16 @@ export class LoginPage {
         await this.navCtrl.setRoot(TabsPage);
       }
     }catch(e) {
+
+      console.error(e.code);
+
+      const error = "E-mail or password dont match."
       this.toast.create({
-        message: "invalid e-mail or password ma boy",
+        showCloseButton: true,
+        position: 'top',
+        message: error,
         duration: 3000,
-        cssClass: "error"
+        cssClass: "toastError"
       }).present();
     }
 

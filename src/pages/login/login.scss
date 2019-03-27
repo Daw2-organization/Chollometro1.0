@@ -11,8 +11,10 @@
   border-color: #488aff;
 }
 
-error{
+.toastError{
   > div{
     background-color: red !important;
-  }
+    border: solid 1px red;
+    border-radius: 20px;
+    }
 }

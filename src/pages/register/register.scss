@@ -2,8 +2,10 @@
   margin-top: 15px;
 }
 
-error{
+.toastError{
   > div{
     background-color: red !important;
+    border: solid 1px red;
+    border-radius: 10px;
   }
 }
