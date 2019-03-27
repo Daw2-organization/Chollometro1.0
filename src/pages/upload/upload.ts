@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {ChollosPage} from "../chollos/chollos";
+import { NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
 import {Chollo} from "../../models/chollo";
-import { firebaseConfig } from "../../app/firebase.config";
 
 
 /**
@@ -31,7 +29,7 @@ export class UploadPage {
   }
 
   uploadChollo(chollo: { title: string; desc: string; url: string }) {
-    var key = firebase.database().ref().child('chollos').push().key;
+    let key = firebase.database().ref().child('chollos').push().key;
 
     firebase
       .database()

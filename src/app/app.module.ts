@@ -16,7 +16,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {ChollosPage} from "../pages/chollos/chollos";
 import {UploadPage} from "../pages/upload/upload";
-import {LoginPage} from "../pages/login/login";
+import {LoginPageModule} from "../pages/login/login.module";
 
 @NgModule({
   declarations: [
@@ -27,12 +27,12 @@ import {LoginPage} from "../pages/login/login";
     TabsPage,
     ChollosPage,
     UploadPage,
-    LoginPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireAuthModule,
+    LoginPageModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
@@ -43,8 +43,7 @@ import {LoginPage} from "../pages/login/login";
     HomePage,
     TabsPage,
     ChollosPage,
-    UploadPage,
-    LoginPage
+    UploadPage
   ],
   providers: [
     StatusBar,
