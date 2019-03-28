@@ -3,3 +3,6 @@ export interface Chollo{
   desc: string;
   url: string;
 }
+
+
+

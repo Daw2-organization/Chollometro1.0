@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { User } from "../../models/user";
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from "firebase";
-
-
+import { UserProvider } from "../../providers/user/user";
+import {LoginPage} from "../login/login";
 
 @IonicPage()
 @Component({
@@ -16,8 +14,7 @@ export class RegisterPage {
 
   user = {} as User;
 
-  constructor(private fireAuth: AngularFireAuth, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {
-
+  constructor(private userDL: UserProvider, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   async register(user: User){
@@ -29,27 +26,16 @@ export class RegisterPage {
         throw error;
       }
 
-      //esto tiene que tener algo dentro para que se haya registrado el usuario correctamente (mirar en firebase)
-      const info = await this.fireAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
+      let done = await this.userDL.userSignIn(user);
+      console.log(done);
 
-
-
-      firebase
-        .database()
-        .ref()
-        .child("users")
-        .child(firebase.auth().currentUser.uid)
-        .set({
-          email: firebase.auth().currentUser.email,
-        });
-
-      if(info){
-        console.log(info);
-        this.navCtrl.setRoot('LoginPage');
+      if(done){
+        this.userDL.uploadUser(user);
+        this.navCtrl.setRoot(LoginPage);
       }
     }catch(e) {
 
-      console.error(e.code);
+      console.log(e.code);
 
       switch (e.code){
         case "auth/email-already-in-use":
@@ -73,9 +59,7 @@ export class RegisterPage {
           break;
       }
 
-
       this.toast.create({
-        showCloseButton: true,
         position: "top",
         message: error,
         duration: 3000,

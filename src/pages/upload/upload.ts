@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import firebase from 'firebase';
-import {Chollo} from "../../models/chollo";
-
+import { Chollo } from "../../models/chollo";
+import { ChollosProvider } from "../../providers/chollos/chollos";
 
 /**
  * Generated class for the UploadPage page.
@@ -18,24 +17,17 @@ import {Chollo} from "../../models/chollo";
 })
 export class UploadPage {
 
-    chollo= {} as Chollo;
+    chollo = {} as Chollo;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private ChollosService: ChollosProvider, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UploadPage');
   }
 
-  uploadChollo(chollo: { title: string; desc: string; url: string }) {
-    let key = firebase.database().ref().child('chollos').push().key;
-
-    firebase
-      .database()
-      .ref()
-      .child ('chollos')
-      .push(key)
-      .set(chollo)
+  uploadChollo(chollo: Chollo){
+    this.ChollosService.uploadChollo(chollo)
   }
 }
