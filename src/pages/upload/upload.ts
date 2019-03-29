@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, normalizeURL, ToastController} from 'ionic-angular';
-import firebase from 'firebase';
 import {Chollo} from "../../models/chollo";
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { ChollosProvider } from "../../providers/chollos/chollos";
 
 
 
@@ -24,22 +24,16 @@ export class UploadPage {
     public myPhotoRef : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public imagePicker: ImagePicker, public toastCtrl: ToastController ) {
+
+  constructor(private ChollosService: ChollosProvider, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UploadPage');
   }
 
-  uploadChollo(chollo: { title: string; desc: string; url: string }) {
-    let key = firebase.database().ref().child('chollos').push().key;
-    this.myPhotoRef = firebase.storage().ref('/chollosImages');
-
-    firebase
-      .database()
-      .ref()
-      .child ('chollos')
-      .push(key)
-      .set(chollo)
+  uploadChollo(chollo: Chollo){
+    this.ChollosService.uploadChollo(chollo)
   }
 
 
