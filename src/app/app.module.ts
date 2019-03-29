@@ -17,6 +17,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {ChollosPage} from "../pages/chollos/chollos";
 import {UploadPage} from "../pages/upload/upload";
 import {LoginPageModule} from "../pages/login/login.module";
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {LoginPageModule} from "../pages/login/login.module";
   providers: [
     StatusBar,
     SplashScreen,
+    ImagePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
