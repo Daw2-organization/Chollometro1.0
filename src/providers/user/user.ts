@@ -16,7 +16,7 @@ export class UserProvider {
 
 
   constructor(public http: HttpClient, private fireAuth: AngularFireAuth) {
-    console.log('Hello UserProvider Provider');
+    // console.log('Hello UserProvider Provider');
   }
 
   userSignIn(user: User){
@@ -25,8 +25,8 @@ export class UserProvider {
 
   }
 
-  userLogIn(){
-
+  userLogIn(user: User){
+    return this.fireAuth.auth.signInWithEmailAndPassword(user.email, user.password);
   }
 
   uploadUser(user: User) {
@@ -41,5 +41,10 @@ export class UserProvider {
         userName: user.userName
       });
   }
+
+  userLogOut(user: User){
+    return this.fireAuth.auth.signOut();
+  }
+
 
 }

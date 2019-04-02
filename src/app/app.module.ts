@@ -8,6 +8,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from "angularfire2/database";
 import { firebaseConfig } from "./firebase.config";
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -15,10 +16,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {ChollosPage} from "../pages/chollos/chollos";
 import {UploadPage} from "../pages/upload/upload";
 import {LoginPageModule} from "../pages/login/login.module";
-import { ProviderpruebaProvider } from '../providers/providerprueba/providerprueba';
 import { UserProvider } from '../providers/user/user';
 import { ChollosProvider } from '../providers/chollos/chollos';
 import {HttpClientModule} from "@angular/common/http";
+import {UserProfilePage} from "../pages/user-profile/user-profile";
+import { ProfileProvider } from '../providers/profile/profile';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import {HttpClientModule} from "@angular/common/http";
     TabsPage,
     ChollosPage,
     UploadPage,
+    UserProfilePage
   ],
   imports: [
     BrowserModule,
@@ -34,6 +38,7 @@ import {HttpClientModule} from "@angular/common/http";
     AngularFireAuthModule,
     LoginPageModule,
     HttpClientModule,
+    AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
@@ -42,15 +47,16 @@ import {HttpClientModule} from "@angular/common/http";
     AboutPage,
     TabsPage,
     ChollosPage,
-    UploadPage
+    UploadPage,
+    UserProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProviderpruebaProvider,
     UserProvider,
-    ChollosProvider
+    ChollosProvider,
+    ProfileProvider
   ]
 })
 export class AppModule {}
