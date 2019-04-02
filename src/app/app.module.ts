@@ -8,7 +8,6 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from "angularfire2/database";
 import { firebaseConfig } from "./firebase.config";
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -34,7 +33,7 @@ import { ProfileProvider } from '../providers/profile/profile';
     TabsPage,
     ChollosPage,
     UploadPage,
-    UserProfilePage
+    UserProfilePage,
     CholloDetailPage
   ],
   imports: [
@@ -54,7 +53,7 @@ import { ProfileProvider } from '../providers/profile/profile';
     TabsPage,
     ChollosPage,
     UploadPage,
-    CholloDetailPage
+    CholloDetailPage,
     UserProfilePage
   ],
   providers: [
