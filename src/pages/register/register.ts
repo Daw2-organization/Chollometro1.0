@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 
 import { User } from "../../models/user";
 import { UserProvider } from "../../providers/user/user";
-import {LoginPage} from "../login/login";
+import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -22,8 +22,12 @@ export class RegisterPage {
     try {
 
       if (this.user.password != this.user.passwordConfirm || this.user.password == null || this.user.passwordConfirm == null){
-        error += "Passwords don't match"
-        throw error;
+        // error += "Passwords don't match"
+        throw error += "Passwords don't match";
+      }
+
+      if(this.user.userName == ""){
+        throw error += "Username cannot be empty";
       }
 
       let done = await this.userDL.userSignIn(user);
@@ -31,7 +35,8 @@ export class RegisterPage {
 
       if(done){
         this.userDL.uploadUser(user);
-        this.navCtrl.setRoot(LoginPage);
+        this.userDL.userLogIn(user);
+        this.navCtrl.setRoot(TabsPage);
       }
     }catch(e) {
 
