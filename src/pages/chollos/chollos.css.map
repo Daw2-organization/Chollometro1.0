@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,YAAa;EACX,gBAAgB,EAAE,OAAO;;AAG3B,KAAM;EACL,gBAAgB,EAAE,OAAO",
+"sources": ["chollos.scss"],
+"names": [],
+"file": "chollos.css"
+}
