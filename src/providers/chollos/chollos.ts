@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as firebase from "firebase";
 import {Chollo} from "../../models/chollo";
-// import {AngularFireDatabase} from "@angular/fire/database";
+import {AngularFireDatabase} from "@angular/fire/database";
 
 /*
   Generated class for the ChollosProvider provider.
@@ -13,8 +13,8 @@ import {Chollo} from "../../models/chollo";
 @Injectable()
 export class ChollosProvider {
 
-  constructor(public http: HttpClient) {
-  // constructor() {
+  constructor(public http: HttpClient, private fdb: AngularFireDatabase) {
+    // constructor() {
     console.log('Hello ChollosProvider Provider');
   }
 
@@ -25,9 +25,30 @@ export class ChollosProvider {
     firebase
       .database()
       .ref()
-      .child ('chollos')
+      .child('chollos')
       .push(key)
       .set(chollo)
   }
 
+  getChollos() {
+    return firebase.database()
+      .ref('/chollos')
+      .once('value')
+      .then((snapshot) => {
+        return snapshot.val()
+      });
+  }
+
+  getCholloDetail(id: any) {
+    return firebase
+      .database()
+      .ref(`/chollos/${id}`)
+      .once("value")
+      .then((snapshot) => {
+        return snapshot.val()
+      });
+  }
+
 }
+
+

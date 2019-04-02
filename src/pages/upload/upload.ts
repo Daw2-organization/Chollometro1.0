@@ -23,9 +23,10 @@ export class UploadPage {
     public chollo= {} as Chollo;
     public myPhotoRef : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public imagePicker: ImagePicker, public toastCtrl: ToastController ) {
+  constructor(private ChollosService: ChollosProvider, public navCtrl: NavController, public navParams: NavParams,
+              public imagePicker: ImagePicker, public toastCtrl: ToastController,
+              ) {
 
-  constructor(private ChollosService: ChollosProvider, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -33,7 +34,9 @@ export class UploadPage {
   }
 
   uploadChollo(chollo: Chollo){
-    this.ChollosService.uploadChollo(chollo)
+    this.ChollosService.uploadChollo(chollo);
+    this.mostrarConfirmacion();
+    this.navCtrl.pop();
   }
 
 
@@ -75,4 +78,16 @@ export class UploadPage {
       })
   }
 
+
+
+
+    mostrarConfirmacion(){
+      let notif = this.toastCtrl.create({
+        message: 'El chollo se ha creado correctamente',
+        duration: 3000,
+        position: 'top'
+      });
+      notif.present();
+
+    }
 }
