@@ -20,7 +20,12 @@ export class ChollosProvider {
 
   uploadChollo(chollo: Chollo) {
 
-    let key = firebase.database().ref().child('chollos').push().key;
+    let key = firebase
+      .database()
+      .ref()
+      .child('chollos')
+      .push()
+      .key;
 
     firebase
       .database()

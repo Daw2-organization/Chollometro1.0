@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
-import {User} from "../../models/user";
-import {UserProvider} from "../../providers/user/user";
+import { IonicPage, NavController, NavParams, PopoverController, AlertController, MenuController, ModalController } from 'ionic-angular';
+import { User } from "../../models/user";
+import { UserProvider } from "../../providers/user/user";
 import { ProfileProvider } from "../../providers/profile/profile";
 import * as firebase from 'firebase';
 import {LoginPage} from "../login/login";
@@ -23,14 +23,16 @@ export class UserProfilePage {
   user = {} as User;
   user2: any;
 
-  constructor(private userDL: UserProvider, private profileDL: ProfileProvider, public popoverCtrl: PopoverController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private userDL: UserProvider, private profileDL: ProfileProvider, public menuCtrl: MenuController,
+              public alertCtrl: AlertController, public popoverCtrl: PopoverController, public navCtrl: NavController,
+              public navParams: NavParams, private modal: ModalController) {
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserProfilePage');
     this.profileDL.getUserData()
-      .then((data)=>{
+      .then((data) => {
         this.user2 = {
           email: data.email,
           userName: data.userName,
@@ -39,7 +41,7 @@ export class UserProfilePage {
     console.log(this.user2);
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
 
   }
 
@@ -48,11 +50,39 @@ export class UserProfilePage {
     popover.present();
   }
 
-  logOut(user: User){
+  logOut(user: User) {
     let done = this.userDL.userLogOut(user);
-    if(done){
+    if (done) {
       this.navCtrl.setRoot(LoginPage);
     }
   }
 
+  presentConfirmation(user: User) {
+    let alert = this.alertCtrl.create({
+      title: 'LogOut',
+      message: 'Do you really want to log out of your account?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+            // alert.dismiss();
+          }
+        },
+        {
+          text: 'LogOut',
+          handler: () => {
+            console.log("LogOut clicked.");
+            this.logOut(user);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  goToUpdateUser() {
+    console.log("goToUpdateUser");
+  }
 }

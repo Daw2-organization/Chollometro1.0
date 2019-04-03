@@ -44,7 +44,8 @@ export class ChollosPage {
             id: k,
             title: snapshot[k].title,
             desc: snapshot[k].desc,
-            url: snapshot[k].url
+            url: snapshot[k].url,
+            date: snapshot[k].date,
           })
         }
       })

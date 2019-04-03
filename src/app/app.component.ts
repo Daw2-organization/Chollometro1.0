@@ -21,4 +21,12 @@ export class MyApp {
       splashScreen.hide();
     });
   }
+
+  chupala(){
+    alert("CHUPALA COLORADO");
+  }
+
+  menuClosed(){
+    alert('PUTA');
+  }
 }

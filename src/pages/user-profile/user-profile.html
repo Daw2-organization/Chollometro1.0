@@ -6,17 +6,30 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>My Profile</ion-title>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-buttons end>
-      <button ion-button icon-only (click)="presentPopover($event)">
-        <ion-icon name="more"></ion-icon>
-      </button>
+
+      <!--<ion-menu [content]="content" side="start" menuId="first" #content>-->
+        <!--<ion-header>-->
+          <!--<ion-toolbar color="terciary">-->
+            <!--<ion-title>{{user2?.userName}}</ion-title>-->
+          <!--</ion-toolbar>-->
+        <!--</ion-header>-->
+        <!--<ion-content>-->
+          <!--<button ion-item menuClose block (click)="goToUpdateUser()"><ion-icon name="contact"></ion-icon>  Settings</button>-->
+          <!--<button ion-item menuClose block color="danger" (click)="presentConfirmation(user)"><ion-icon name="power"></ion-icon>  Log Out</button>-->
+        <!--</ion-content>-->
+      <!--</ion-menu>-->
+      <!--<button ion-button icon-only (click)="presentPopover($event)">-->
+        <!--<ion-icon name="more"></ion-icon>-->
+      <!--</button>-->
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
   <body ng-app="starter">
 
     <ion-content>
@@ -32,9 +45,10 @@
       </div>
 
       <div>
-        <button ion-button block color="danger" (click)="logOut(user)">Log Out</button>
       </div>
     </ion-content>
   </body>
 
 </ion-content>
+
+
