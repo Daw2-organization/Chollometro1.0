@@ -25,6 +25,10 @@ import { Cloudinary } from "cloudinary-core";
 import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
 import {UserProfilePage} from "../pages/user-profile/user-profile";
 import { ProfileProvider } from '../providers/profile/profile';
+import {CholloEditPage} from "../pages/chollo-edit/chollo-edit";
+
+
+
 
 @NgModule({
   declarations: [
@@ -35,6 +39,7 @@ import { ProfileProvider } from '../providers/profile/profile';
     UploadPage,
     UserProfilePage,
     CholloDetailPage
+    CholloEditPage
   ],
   imports: [
     BrowserModule,
@@ -55,6 +60,7 @@ import { ProfileProvider } from '../providers/profile/profile';
     UploadPage,
     CholloDetailPage,
     UserProfilePage
+    CholloEditPage
   ],
   providers: [
     StatusBar,

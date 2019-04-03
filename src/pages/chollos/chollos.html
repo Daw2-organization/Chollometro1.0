@@ -12,27 +12,43 @@
 </ion-header>
 
 <ion-content padding class="hola">
-  <ion-list>
+
+  <!--
+  <ion-segment>
+    <ion-segment-button value="vistas">
+      Más vistas
+    </ion-segment-button>
+    <ion-segment-button value="likes">
+      Más valoradas
+    </ion-segment-button>
+  </ion-segment>
+-->
     <ion-card *ngFor="let chollo of chollitos" (click)="goToCholloDetail(chollo?.id)">
-      <img src="../../assets/imgs/depositphotos_129253136-stock-illustration-special-offer-seal-star-icon.jpg">
-      <ion-card-content>
-        <ion-card-title>
-          {{chollo?.title}}
-        </ion-card-title>
-        <p>
-          {{chollo?.desc}}
-        </p>
-      </ion-card-content>
-      <button ion-button icon-left clear small>
-        <ion-icon name="thumbs-up"></ion-icon>
-        <div>36 likes</div>
-      </button>
-      <button ion-button icon-left clear small>
-        <ion-icon name="arrow-round-up"></ion-icon>
-        <div>Popularidad 30%</div>
-      </button>
+      <ion-item>
+        <ion-avatar item-left>
+            <img src="../../assets/imgs/abstract-user-flat-2.png">
+        </ion-avatar>
+          {{chollo?.userName}}
+          {{chollo?.date}}
+      </ion-item>
+        <img src="../../assets/imgs/depositphotos_129253136-stock-illustration-special-offer-seal-star-icon.jpg"/>
+        <ion-card-content>
+          <ion-card-title>
+           {{chollo?.title}}
+          </ion-card-title>
+          <p>
+            {{chollo?.desc}}
+          </p>
+        </ion-card-content>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>36 likes</div>
+        </button>
+        <button ion-button icon-left clear small>
+          <ion-icon name="arrow-round-up"></ion-icon>
+          <div>Popularidad 30%</div>
+        </button>
     </ion-card>
-  </ion-list>
 
   <ion-fab bottom right>
     <button ion-fab color="Warning" (click)="goToUploadPage()" >+</button>

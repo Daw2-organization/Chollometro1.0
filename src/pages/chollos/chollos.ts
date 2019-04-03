@@ -4,6 +4,7 @@ import { UploadPage } from "../upload/upload";
 import { ChollosProvider } from "../../providers/chollos/chollos"
 import {visitValue} from "@angular/compiler/src/util";
 import {CholloDetailPage} from "../chollo-detail/chollo-detail";
+import {UserProvider} from "../../providers/user/user";
 
 /**
  * Generated class for the ChollosPage page.
@@ -45,13 +46,16 @@ export class ChollosPage {
             title: snapshot[k].title,
             desc: snapshot[k].desc,
             url: snapshot[k].url,
+            user: snapshot[k].user,
             date: snapshot[k].date,
           })
         }
       })
       .then(() => loader.dismiss())
       .then(()=>console.log(this.chollitos));
+
   }
+
 
   goToUploadPage(){
     this.navCtrl.push(UploadPage);

@@ -35,6 +35,26 @@ export class ChollosProvider {
       .set(chollo)
   }
 
+  updateChollo(chollo : Chollo, id : any){
+    console.log("Chupala");
+    firebase
+      .database()
+      .ref()
+      .child(`/chollos/${id}`)
+      .update({title : chollo.title, desc: chollo.desc, url: chollo.url, user: chollo.user, date: chollo.date})
+      .then(() => console.log("Offer deleted"))
+  }
+
+
+  removeChollo(id: any){
+    firebase
+      .database()
+      .ref()
+      .child(`/chollos/${id}`)
+      .remove()
+      .then(() => console.log("Offer deleted"))
+  }
+
   getChollos() {
     return firebase.database()
       .ref('/chollos')

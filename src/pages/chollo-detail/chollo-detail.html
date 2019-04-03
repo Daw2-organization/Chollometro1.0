@@ -14,8 +14,13 @@
   <ion-item>
     <ion-card>
       <ion-card-header> {{chollo.title}}}</ion-card-header>
-      <ion-card-header> {{chollo.desc}} <br> {{chollo.url}}</ion-card-header>
+      <ion-card-content>
+        <h2>{{chollo?.desc}}</h2>
+        <h3>{{chollo?.url}}</h3>
+      </ion-card-content>
     </ion-card>
+    <button ion-button default color="secondary" (click)="openModal()"><ion-icon name="create"></ion-icon></button>
+    <button ion-button default color="secondary" (click)="presentConfirmation()"><ion-icon name="trash"></ion-icon></button>
   </ion-item>
 
 </ion-content>

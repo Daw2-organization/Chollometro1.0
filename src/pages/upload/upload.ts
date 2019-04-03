@@ -6,6 +6,8 @@ import { ChollosProvider } from "../../providers/chollos/chollos";
 import { ProfileProvider } from "../../providers/profile/profile";
 import * as firebase from 'firebase';
 
+
+
 /**
  * Generated class for the UploadPage page.
  *
@@ -91,5 +93,4 @@ export class UploadPage {
       });
       notif.present();
 
-    }
 }
