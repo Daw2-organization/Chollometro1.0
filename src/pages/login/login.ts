@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 
 import { User } from "../../models/user";
 import { AngularFireAuth } from 'angularfire2/auth';
+import { UserProvider } from "../../providers/user/user";
 
 import { TabsPage } from "../tabs/tabs";
 
@@ -16,16 +17,17 @@ export class LoginPage {
 
   user = {} as User;
 
-  constructor(private fireAuth: AngularFireAuth, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private userDL: UserProvider, private fireAuth: AngularFireAuth, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   async login(user: User){
     try {
-      const info = await this.fireAuth.auth.signInWithEmailAndPassword(user.email, user.password);
 
-      if(info){
-        console.log(info);
-        await this.navCtrl.setRoot(TabsPage);
+      let done = await this.userDL.userLogIn(user);
+      console.log(done);
+
+      if(done){
+        this.navCtrl.setRoot(TabsPage);
       }
     }catch(e) {
 

@@ -16,10 +16,15 @@ import {ChollosPage} from "../pages/chollos/chollos";
 import {UploadPage} from "../pages/upload/upload";
 import {LoginPageModule} from "../pages/login/login.module";
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
-import { ProviderpruebaProvider } from '../providers/providerprueba/providerprueba';
 import { UserProvider } from '../providers/user/user';
 import { ChollosProvider } from '../providers/chollos/chollos';
 import {HttpClientModule} from "@angular/common/http";
+import { AngularFireDatabase, AngularFireDatabaseModule} from "angularfire2/database";
+import { CholloDetailPage} from "../pages/chollo-detail/chollo-detail";
+import { Cloudinary } from "cloudinary-core";
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import {UserProfilePage} from "../pages/user-profile/user-profile";
+import { ProfileProvider } from '../providers/profile/profile';
 
 @NgModule({
   declarations: [
@@ -28,6 +33,8 @@ import {HttpClientModule} from "@angular/common/http";
     TabsPage,
     ChollosPage,
     UploadPage,
+    UserProfilePage,
+    CholloDetailPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +42,9 @@ import {HttpClientModule} from "@angular/common/http";
     AngularFireAuthModule,
     LoginPageModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    CloudinaryModule.forRoot({ Cloudinary }, { cloud_name: 'oskitayeduado' } as CloudinaryConfiguration)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,17 +52,19 @@ import {HttpClientModule} from "@angular/common/http";
     AboutPage,
     TabsPage,
     ChollosPage,
-    UploadPage
+    UploadPage,
+    CholloDetailPage,
+    UserProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     ImagePicker,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProviderpruebaProvider,
     UserProvider,
-    ChollosProvider
+    ChollosProvider,
+    ProfileProvider
   ]
 })
+
 export class AppModule {}
