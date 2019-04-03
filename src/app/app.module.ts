@@ -38,7 +38,7 @@ import {CholloEditPage} from "../pages/chollo-edit/chollo-edit";
     ChollosPage,
     UploadPage,
     UserProfilePage,
-    CholloDetailPage
+    CholloDetailPage,
     CholloEditPage
   ],
   imports: [
@@ -59,7 +59,7 @@ import {CholloEditPage} from "../pages/chollo-edit/chollo-edit";
     ChollosPage,
     UploadPage,
     CholloDetailPage,
-    UserProfilePage
+    UserProfilePage,
     CholloEditPage
   ],
   providers: [

@@ -85,12 +85,13 @@ export class UploadPage {
   //     })
   // }
 
-    mostrarConfirmacion(){
+    mostrarConfirmacion() {
       let notif = this.toastCtrl.create({
         message: 'El chollo se ha creado correctamente',
         duration: 3000,
         position: 'top'
       });
       notif.present();
+    }
 
 }
