@@ -26,21 +26,7 @@ export class ProfileProvider {
 
   getUserData(){
 
-    console.log("getUserData");
-
-    // firebase
-    //   .database()
-    //   .ref(`users`)
-    //   .on('value', (snapshot) => {
-    //     let result = snapshot.value();
-    //     for(let k in result){ //"k" provides key Id of each object
-    //       this.userData.push({
-    //         id : k,
-    //         name : result[k].name,
-    //         phone : result[k].phone,
-    //       });
-    //     }
-    //   });
+    // console.log("getUserData");
 
     return firebase
       .database()
@@ -53,24 +39,11 @@ export class ProfileProvider {
         //   this.userData.email = email;
         //   this.userData.userName = snapshot.
         // }
-        console.log(snapshot.key);
-        console.log(firebase.auth().currentUser.uid);
-        console.log(snapshot);
+        // console.log(snapshot.key);
+        // console.log(firebase.auth().currentUser.uid);
+        // console.log(snapshot);
 
         return snapshot.val();
       });
-
-    // firebase.
-    //     database().
-    //     ref(`/users/`).
-    //     child('users').
-    //     child(firebase.auth().currentUser.uid).
-    //     on('value', userSnapshot =>{
-    //       this.user = userSnapshot.val();
-    // });
-
-    // this.data = this.firedb.list(`users`).valueChanges();
-    // console.log(this.data);
-    // return this.data;
   }
 }

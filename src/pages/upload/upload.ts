@@ -40,6 +40,7 @@ export class UploadPage {
     chollo.date = new Date().toLocaleDateString();
     await this.profileDL.getUserData()
       .then((data) => {
+        console.log(data.key);
         chollo.user = data.userName;
       });
     this.ChollosService.uploadChollo(chollo);

@@ -16,7 +16,6 @@ import {ChollosPage} from "../pages/chollos/chollos";
 import {UploadPage} from "../pages/upload/upload";
 import {LoginPageModule} from "../pages/login/login.module";
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
-import { UserProvider } from '../providers/user/user';
 import { ChollosProvider } from '../providers/chollos/chollos';
 import {HttpClientModule} from "@angular/common/http";
 import { AngularFireDatabase, AngularFireDatabaseModule} from "angularfire2/database";
@@ -26,8 +25,7 @@ import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5
 import {UserProfilePage} from "../pages/user-profile/user-profile";
 import { ProfileProvider } from '../providers/profile/profile';
 import {CholloEditPage} from "../pages/chollo-edit/chollo-edit";
-
-
+import { AuthenticationProvider } from "../providers/authentication/authentication";
 
 
 @NgModule({
@@ -67,7 +65,7 @@ import {CholloEditPage} from "../pages/chollo-edit/chollo-edit";
     SplashScreen,
     ImagePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserProvider,
+    AuthenticationProvider,
     ChollosProvider,
     ProfileProvider
   ]
