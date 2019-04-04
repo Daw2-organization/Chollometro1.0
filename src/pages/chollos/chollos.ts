@@ -5,6 +5,7 @@ import { ChollosProvider } from "../../providers/chollos/chollos"
 import {visitValue} from "@angular/compiler/src/util";
 import {CholloDetailPage} from "../chollo-detail/chollo-detail";
 import {UserProvider} from "../../providers/user/user";
+import {Chollo} from "../../models/chollo";
 
 /**
  * Generated class for the ChollosPage page.
@@ -21,9 +22,12 @@ import {UserProvider} from "../../providers/user/user";
 export class ChollosPage {
 
   chollitos : any = [];
+  name : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public loadingController: LoadingController, public provChollo: ChollosProvider) {
+              public loadingController: LoadingController,
+              public provChollo: ChollosProvider,
+              public userProvider : UserProvider) {
   }
 
 
@@ -31,31 +35,51 @@ export class ChollosPage {
   //se ha subido a la base de datos.
 
   ionViewWillEnter() {
+    this.doSomething()
+  }
+
+  doSomething() {
     let loader = this.loadingController.create({
-      content: "Cargando los mejores chollos"
+      content: "Loading the best offers"
     });
-    loader.present()
+    loader.present();
     this.provChollo.getChollos()
-      .then((snapshot) => {
+      .then(async (snapshot) => {
         //Vaciamos el vector pq cuando subimos un nuevo chollo, se quedan en el vector los anteriores chollos
         // y además carga otra vez todos y el nuevo
         this.chollitos = [];
         for (let k in snapshot) {
-          this.chollitos.push({
-            id: k,
-            title: snapshot[k].title,
-            desc: snapshot[k].desc,
-            url: snapshot[k].url,
-            user: snapshot[k].user,
-            date: snapshot[k].date,
+          this.getUserName(snapshot[k].userID).then(
+            value => {
+              console.log("---> ", value)
+              this.chollitos.push({
+                  id: k,
+                  title: snapshot[k].title,
+                  desc: snapshot[k].desc,
+                  url: snapshot[k].url,
+                  date: snapshot[k].date,
+                  userID: snapshot[k].userID,
+                  userName: value
+                }
+              );
           })
         }
+
       })
       .then(() => loader.dismiss())
       .then(()=>console.log(this.chollitos));
-
   }
 
+
+  getUserName(uid: any): Promise<string> {
+    return this.userProvider.getUserName(uid)
+      .then((snapshot) => {
+        console.log(snapshot.userName);
+        return snapshot.userName;
+      }, () => {
+        return "Esto ha explotado"
+      });
+  }
 
   goToUploadPage(){
     this.navCtrl.push(UploadPage);

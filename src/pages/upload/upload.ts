@@ -23,11 +23,10 @@ import * as firebase from 'firebase';
 export class UploadPage {
 
     public chollo= {} as Chollo;
-    public usuario : any;
 
   constructor(private ChollosService: ChollosProvider, public navCtrl: NavController,
               public navParams: NavParams, public imagePicker: ImagePicker,
-              public toastCtrl: ToastController, private profileDL: ProfileProvider
+              public toastCtrl: ToastController
               ) {
 
   }
@@ -36,12 +35,9 @@ export class UploadPage {
     console.log('ionViewDidLoad UploadPage');
   }
 
-  async uploadChollo(chollo: Chollo){
+   uploadChollo(chollo: Chollo){
+    chollo.userID = firebase.auth().currentUser.uid;
     chollo.date = new Date().toLocaleDateString();
-    await this.profileDL.getUserData()
-      .then((data) => {
-        chollo.user = data.userName;
-      });
     this.ChollosService.uploadChollo(chollo);
     this.mostrarConfirmacion();
     this.navCtrl.pop();

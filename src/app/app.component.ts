@@ -10,8 +10,8 @@ import {ChollosPage} from "../pages/chollos/chollos";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = LoginPage;
-  // rootPage:any = ChollosPage;
+  //rootPage:any = LoginPage;
+   rootPage:any = ChollosPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

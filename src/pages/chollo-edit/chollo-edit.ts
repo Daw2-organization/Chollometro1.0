@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ModalController, ViewController, ToastController} from 'ionic-angular';
 import {ChollosProvider} from "../../providers/chollos/chollos";
 import {Chollo} from "../../models/chollo";
+import {CholloDetailPage} from "../chollo-detail/chollo-detail";
 
 /**
  * Generated class for the CholloEditPage page.
@@ -28,6 +29,7 @@ export class CholloEditPage {
   ionViewWillLoad() {
     this.chollazo = this.navParams.get('chollo');
     this.id = this.navParams.get('id');
+    console.log('chollo modal')
   }
 
   closeModal(){
@@ -36,9 +38,9 @@ export class CholloEditPage {
 
 
   updateChollo(){
-    console.log("HGola");
-    //this.cholloService.updateChollo(this.chollazo, this.id);
-    //this.showConfirmation();
+    this.cholloService.updateChollo(this.chollazo, this.id);
+    this.showConfirmation();
+    this.closeModal();
 
   }
 

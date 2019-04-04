@@ -26,6 +26,8 @@ import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5
 import {UserProfilePage} from "../pages/user-profile/user-profile";
 import { ProfileProvider } from '../providers/profile/profile';
 import {CholloEditPage} from "../pages/chollo-edit/chollo-edit";
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { ImageProvider } from '../providers/image/image';
 
 
 
@@ -49,6 +51,7 @@ import {CholloEditPage} from "../pages/chollo-edit/chollo-edit";
     HttpClientModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    Ng2CloudinaryModule,
     CloudinaryModule.forRoot({ Cloudinary }, { cloud_name: 'oskitayeduado' } as CloudinaryConfiguration)
   ],
   bootstrap: [IonicApp],
@@ -69,7 +72,8 @@ import {CholloEditPage} from "../pages/chollo-edit/chollo-edit";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
     ChollosProvider,
-    ProfileProvider
+    ProfileProvider,
+    ImageProvider
   ]
 })
 

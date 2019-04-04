@@ -42,6 +42,17 @@ export class UserProvider {
       });
   }
 
+
+  getUserName(uid : any){
+    return firebase
+      .database()
+      .ref(`/users/${uid}`)
+      .once("value")
+      .then( (snapshot) => {
+        return snapshot.val();
+      })
+  }
+
   userLogOut(user: User){
     return this.fireAuth.auth.signOut();
   }

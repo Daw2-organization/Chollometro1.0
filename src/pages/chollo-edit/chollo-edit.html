@@ -15,22 +15,21 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-label color="primary" floating>Title</ion-label>
+    <ion-label color="danger" floating>Title</ion-label>
     <ion-input type="text" value="{{chollazo?.title}}"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label color="primary" floating>Description</ion-label>
+    <ion-label color="danger" floating>Description</ion-label>
     <ion-textarea value="{{chollazo?.desc}}"></ion-textarea>
   </ion-item>
 
   <ion-item>
-    <ion-label color="primary" floating>Url</ion-label>
+    <ion-label color="danger" floating>Url</ion-label>
     <ion-input type="text" value="{{chollazo?.url}}"></ion-input>
   </ion-item>
-      <button ion-button default color="danger" type="submit" (click)="updateChollo()"><ion-icon name="images"></ion-icon></button>
-  <br>
 
-  <button ion-button block color="primary">Upload edited offer</button>
+
+  <button ion-button block color="danger" (click)="updateChollo()">Upload edited offer</button>
 </ion-content>
 
