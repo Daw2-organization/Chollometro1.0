@@ -1,16 +1,13 @@
 <ion-menu [content]="content" side="left" menuId="first">
   <ion-header>
     <ion-toolbar color="terciary">
-      <ion-title>{{user2?.userName}}</ion-title>
+      <ion-title>Settings</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-item (click)="chupala()">
-        ASAAAAAAAAAAAAAAAAA
-      </ion-item>
-      <button ion-item (click)="chupala()">Item UNO</button>
-      <button ion-item (click)="chupala()">Item DOS</button>
+      <button ion-item menuClose (click)="goToUpdateUser()"><ion-icon name="contact"></ion-icon>  UpdateUser</button>
+      <button ion-item menuClose (click)="presentConfirmation()"><ion-icon name="power"></ion-icon>  Log Out</button>
     </ion-list>
   </ion-content>
 

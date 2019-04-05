@@ -4,8 +4,7 @@ import { UploadPage } from "../upload/upload";
 import { ChollosProvider } from "../../providers/chollos/chollos"
 import {visitValue} from "@angular/compiler/src/util";
 import {CholloDetailPage} from "../chollo-detail/chollo-detail";
-import {UserProvider} from "../../providers/user/user";
-import {Chollo} from "../../models/chollo";
+import {AuthenticationProvider} from "../../providers/authentication/authentication";
 
 /**
  * Generated class for the ChollosPage page.
@@ -26,8 +25,7 @@ export class ChollosPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public loadingController: LoadingController,
-              public provChollo: ChollosProvider,
-              public userProvider : UserProvider) {
+              public provChollo: ChollosProvider, private authProvider: AuthenticationProvider) {
   }
 
 
@@ -72,7 +70,7 @@ export class ChollosPage {
 
 
   getUserName(uid: any): Promise<string> {
-    return this.userProvider.getUserName(uid)
+    return this.authProvider.getUserName(uid)
       .then((snapshot) => {
         console.log(snapshot.userName);
         return snapshot.userName;

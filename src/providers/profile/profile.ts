@@ -26,7 +26,7 @@ export class ProfileProvider {
 
   getUserData(){
 
-    console.log("getUserData");
+    // console.log("getUserData");
 
     return firebase
       .database()
