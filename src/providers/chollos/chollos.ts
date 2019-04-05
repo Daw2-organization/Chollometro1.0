@@ -33,6 +33,7 @@ export class ChollosProvider {
       .child('chollos')
       .push(key)
       .set(chollo)
+    console.log("Update ok")
   }
 
 
@@ -44,16 +45,11 @@ export class ChollosProvider {
       date: chollo.date,
       userID: chollo.userID
     }
-    console.log('updating chollo: ', id);
-    console.log("User id :" + chollo.userID);
-    console.log(chollo);
+
     firebase
       .database()
-      //.ref(`/chollos/${id}`)
-      .ref()
-      .child('chollos')
-      .child(id)
-      .set(data)
+      .ref(`/chollos/${id}`)
+      .update(chollo)
       .then(() => console.log("Offer updated"),
         () => console.error("Error while updating the offer"))
   }

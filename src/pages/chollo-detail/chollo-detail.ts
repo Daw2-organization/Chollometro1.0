@@ -49,8 +49,6 @@ export class CholloDetailPage {
           userID: snapshot.userID,
           date: snapshot.date
         }
-        console.log("Chollo");
-        console.log(this.chollo);
         this.getUserName();
       })
       .then(() => loader.dismiss());

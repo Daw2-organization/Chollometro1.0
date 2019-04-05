@@ -23,33 +23,36 @@
     </ion-segment-button>
   </ion-segment>
 -->
-    <ion-card class="ayy" *ngFor="let chollo of chollitos" (click)="goToCholloDetail(chollo?.id)">
+  <ion-card class="ayy" *ngFor="let chollo of chollitos">
+    <ion-card-content (click)="goToCholloDetail(chollo?.id)">
       <ion-item>
         <ion-avatar item-left>
-            <img src="../../assets/imgs/user.png">
+          <img src="../../assets/imgs/user.png">
         </ion-avatar>
+        <ion-row>
           {{chollo?.userName}}
+          {{chollo?.date}}
+        </ion-row>
       </ion-item>
-        <img src="../../assets/imgs/offer.jpg"/>
-        <ion-card-content>
-          <ion-card-title>
-           {{chollo?.title}}
-          </ion-card-title>
-          <p>
-            {{chollo?.desc}}
-          </p>
-        </ion-card-content>
-        <button ion-button icon-left clear small>
-          <ion-icon name="thumbs-up"></ion-icon>
-          <div>36 likes</div>
-        </button>
-        <button ion-button icon-left clear small>
-          <ion-icon name="flame"></ion-icon>
-          <div>Popularidad 30%</div>
-        </button>
-    </ion-card>
+      <img src="../../assets/imgs/offer.jpg"/>
+      <ion-card-title>
+        {{chollo?.title}}
+      </ion-card-title>
+      <p>
+        {{chollo?.desc}}
+      </p>
+    </ion-card-content>
+    <button ion-button icon-left clear small>
+      <ion-icon name="thumbs-up"></ion-icon>
+      <div>36 likes</div>
+    </button>
+    <button ion-button icon-left clear small>
+      <ion-icon name="flame"></ion-icon>
+      <div>Popularidad 30%</div>
+    </button>
+  </ion-card>
 
   <ion-fab bottom right>
-    <button ion-fab color="Warning" (click)="goToUploadPage()" >+</button>
+    <button ion-fab color="Warning" (click)="goToUploadPage()">+</button>
   </ion-fab>
 </ion-content>

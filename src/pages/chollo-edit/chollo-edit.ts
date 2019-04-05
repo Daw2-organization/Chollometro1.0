@@ -21,6 +21,9 @@ export class CholloEditPage {
 
   chollazo : Chollo;
   id : any;
+  newTitle : any;
+  newDesc : any;
+  newUrl: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public view : ViewController,
               public cholloService : ChollosProvider, public toast : ToastController) {
 
@@ -29,7 +32,6 @@ export class CholloEditPage {
   ionViewWillLoad() {
     this.chollazo = this.navParams.get('chollo');
     this.id = this.navParams.get('id');
-    console.log('chollo modal')
   }
 
   closeModal(){
@@ -38,9 +40,13 @@ export class CholloEditPage {
 
 
   updateChollo(){
+    this.chollazo.title = this.newTitle;
+    this.chollazo.desc = this.newDesc;
+    this.chollazo.desc = this.newUrl;
     this.cholloService.updateChollo(this.chollazo, this.id);
     this.showConfirmation();
     this.closeModal();
+    this.ionViewWillLoad();
 
   }
 

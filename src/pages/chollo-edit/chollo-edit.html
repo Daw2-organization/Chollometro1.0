@@ -16,17 +16,17 @@
 <ion-content padding>
   <ion-item>
     <ion-label color="danger" floating>Title</ion-label>
-    <ion-input type="text" value="{{chollazo?.title}}"></ion-input>
+    <ion-input type="text" [ngModel]="newTitle" value="{{chollazo?.title}}"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label color="danger" floating>Description</ion-label>
-    <ion-textarea value="{{chollazo?.desc}}"></ion-textarea>
+    <ion-textarea [ngModel]="newDesc" value="{{chollazo?.desc}}"></ion-textarea>
   </ion-item>
 
   <ion-item>
     <ion-label color="danger" floating>Url</ion-label>
-    <ion-input type="text" value="{{chollazo?.url}}"></ion-input>
+    <ion-input type="text" [ngModel]="newUrl" value="{{chollazo?.url}}"></ion-input>
   </ion-item>
 
 

@@ -49,7 +49,6 @@ export class ChollosPage {
         for (let k in snapshot) {
           this.getUserName(snapshot[k].userID).then(
             value => {
-              console.log("---> ", value)
               this.chollitos.push({
                   id: k,
                   title: snapshot[k].title,
@@ -72,7 +71,6 @@ export class ChollosPage {
   getUserName(uid: any): Promise<string> {
     return this.authProvider.getUserName(uid)
       .then((snapshot) => {
-        console.log(snapshot.userName);
         return snapshot.userName;
       }, () => {
         return "Esto ha explotado"

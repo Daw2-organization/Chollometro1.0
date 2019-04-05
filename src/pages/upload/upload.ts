@@ -34,7 +34,7 @@ export class UploadPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad UploadPage');
   }
-
+  
    uploadChollo(chollo: Chollo){
     chollo.userID = firebase.auth().currentUser.uid;
     chollo.date = new Date().toLocaleDateString();
