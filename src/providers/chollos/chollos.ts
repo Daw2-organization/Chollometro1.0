@@ -35,14 +35,27 @@ export class ChollosProvider {
       .set(chollo)
   }
 
+
   updateChollo(chollo : Chollo, id : any){
-    console.log("Chupala");
+    let data = {
+      title : chollo.title,
+      desc: chollo.desc,
+      url: chollo.url,
+      date: chollo.date,
+      userID: chollo.userID
+    }
+    console.log('updating chollo: ', id);
+    console.log("User id :" + chollo.userID);
+    console.log(chollo);
     firebase
       .database()
+      //.ref(`/chollos/${id}`)
       .ref()
-      .child(`/chollos/${id}`)
-      .update({title : chollo.title, desc: chollo.desc, url: chollo.url, user: chollo.user, date: chollo.date})
-      .then(() => console.log("Offer deleted"))
+      .child('chollos')
+      .child(id)
+      .set(data)
+      .then(() => console.log("Offer updated"),
+        () => console.error("Error while updating the offer"))
   }
 
 

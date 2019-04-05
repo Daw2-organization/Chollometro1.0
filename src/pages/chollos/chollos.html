@@ -7,7 +7,7 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title>Chollazos del día beibi</ion-title>
+    <ion-title text-center>Today's best offers</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -23,15 +23,14 @@
     </ion-segment-button>
   </ion-segment>
 -->
-    <ion-card *ngFor="let chollo of chollitos" (click)="goToCholloDetail(chollo?.id)">
+    <ion-card class="ayy" *ngFor="let chollo of chollitos" (click)="goToCholloDetail(chollo?.id)">
       <ion-item>
         <ion-avatar item-left>
-            <img src="../../assets/imgs/abstract-user-flat-2.png">
+            <img src="../../assets/imgs/user.png">
         </ion-avatar>
           {{chollo?.userName}}
-          {{chollo?.date}}
       </ion-item>
-        <img src="../../assets/imgs/depositphotos_129253136-stock-illustration-special-offer-seal-star-icon.jpg"/>
+        <img src="../../assets/imgs/offer.jpg"/>
         <ion-card-content>
           <ion-card-title>
            {{chollo?.title}}
@@ -45,7 +44,7 @@
           <div>36 likes</div>
         </button>
         <button ion-button icon-left clear small>
-          <ion-icon name="arrow-round-up"></ion-icon>
+          <ion-icon name="flame"></ion-icon>
           <div>Popularidad 30%</div>
         </button>
     </ion-card>

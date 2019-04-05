@@ -34,16 +34,11 @@ export class ProfileProvider {
       .child(firebase.auth().currentUser.uid)
       .once('value')
       .then((snapshot) => {
-        // console.log(snapshot);
-        // for(let k in snapshot){
-        //   this.userData.email = email;
-        //   this.userData.userName = snapshot.
-        // }
-        // console.log(snapshot.key);
-        // console.log(firebase.auth().currentUser.uid);
-        // console.log(snapshot);
-
+        //console.log(snapshot.key);
+        //console.log(firebase.auth().currentUser.uid);
+        //console.log(snapshot);
         return snapshot.val();
       });
   }
+
 }

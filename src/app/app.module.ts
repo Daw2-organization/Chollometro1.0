@@ -26,6 +26,8 @@ import {UserProfilePage} from "../pages/user-profile/user-profile";
 import { ProfileProvider } from '../providers/profile/profile';
 import {CholloEditPage} from "../pages/chollo-edit/chollo-edit";
 import { AuthenticationProvider } from "../providers/authentication/authentication";
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { ImageProvider } from '../providers/image/image';
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import { AuthenticationProvider } from "../providers/authentication/authenticati
     HttpClientModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    Ng2CloudinaryModule,
     CloudinaryModule.forRoot({ Cloudinary }, { cloud_name: 'oskitayeduado' } as CloudinaryConfiguration)
   ],
   bootstrap: [IonicApp],
@@ -67,7 +70,8 @@ import { AuthenticationProvider } from "../providers/authentication/authenticati
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthenticationProvider,
     ChollosProvider,
-    ProfileProvider
+    ProfileProvider,
+    ImageProvider
   ]
 })
 

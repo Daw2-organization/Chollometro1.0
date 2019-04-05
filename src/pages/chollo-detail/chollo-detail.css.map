@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAIA,GAAG;EACD,UAAU,EAAE,IAAI;EAChB,UAAU,EAAE,GAAG",
+"sources": ["chollo-detail.scss"],
 "names": [],
 "file": "chollo-detail.css"
 }
