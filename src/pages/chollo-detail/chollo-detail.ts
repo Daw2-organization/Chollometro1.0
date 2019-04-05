@@ -3,7 +3,7 @@ import { IonicPage, NavController, LoadingController, NavParams, AlertController
 import {ChollosProvider} from "../../providers/chollos/chollos";
 import {ChollosPage} from "../chollos/chollos";
 import {CholloEditPage} from "../chollo-edit/chollo-edit";
-import {UserProvider} from "../../providers/user/user";
+import {AuthenticationProvider} from "../../providers/authentication/authentication";
 
 /**
  * Generated class for the CholloDetailPage page.
@@ -28,7 +28,7 @@ export class CholloDetailPage {
               public loadingController: LoadingController,
               public alert : AlertController,
               public modal : ModalController,
-              public userProvider : UserProvider){
+              public authProvider: AuthenticationProvider){
               this.id = navParams.data;
 
   }
@@ -63,7 +63,7 @@ export class CholloDetailPage {
   }
 
   getUserName(){
-    this.userProvider.getUserName(this.chollo.userID)
+    this.authProvider.getUserName(this.chollo.userID)
       .then( (snapshot) => {
         this.name = snapshot.userName;
       })

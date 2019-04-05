@@ -37,7 +37,7 @@ export class SignupPage {
       passwordConfirm: ['',
         Validators.compose([Validators.minLength(6), Validators.required])],
       userName: ['',
-        Validators.compose([Validators.minLength(5), UsernameValidator.isValid, Validators.required])],
+        Validators.compose([Validators.minLength(3), UsernameValidator.isValid, Validators.required])],
       name: ['',
         Validators.compose([Validators.minLength(3), Validators.required])],
       surname: ['',

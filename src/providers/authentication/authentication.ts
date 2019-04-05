@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import {User} from "../../models/user";
 
 /*
   Generated class for the AuthenticationProvider provider.
@@ -49,6 +48,16 @@ export class AuthenticationProvider {
 
   logoutUser(): Promise<void> {
     return firebase.auth().signOut();
+  }
+
+  getUserName(uid : any){
+    return firebase
+      .database()
+      .ref(`/users/${uid}`)
+      .once("value")
+      .then( (snapshot) => {
+        return snapshot.val();
+      })
   }
 
 }
