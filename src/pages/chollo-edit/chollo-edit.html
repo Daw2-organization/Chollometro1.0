@@ -14,22 +14,26 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item>
-    <ion-label color="danger" floating>Title</ion-label>
-    <ion-input type="text" [ngModel]="newTitle" value="{{chollazo?.title}}"></ion-input>
-  </ion-item>
+  <form [formGroup]="updateForm" (submit)="updateChollo()" novalidate>
 
-  <ion-item>
-    <ion-label color="danger" floating>Description</ion-label>
-    <ion-textarea [ngModel]="newDesc" value="{{chollazo?.desc}}"></ion-textarea>
-  </ion-item>
+    <ion-item>
+      <ion-label  color="danger" floating>Title</ion-label>
+      <ion-input formControlName="title" type="text" value="{{chollos?.title}}"
+                 [class.invalid]="!updateForm.controls.title.valid && blur"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label color="danger" floating>Url</ion-label>
-    <ion-input type="text" [ngModel]="newUrl" value="{{chollazo?.url}}"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label  color="danger" floating>Description</ion-label>
+      <ion-textarea formControlName="description" value="{{chollo?.desc}}"
+                    [class.invalid]="!updateForm.controls.description.valid && blur"></ion-textarea>
+    </ion-item>
 
-
-  <button ion-button block color="danger" (click)="updateChollo()">Upload edited offer</button>
+    <ion-item>
+      <ion-label  color="danger" floating>Url</ion-label>
+      <ion-input formControlName="url" type="text" value="{{chollazo?.url}}"
+                 [class.invalid]="!updateForm.controls.url.valid && blur"></ion-input>
+    </ion-item>
+    <button ion-button block color="danger" type="submit">Upload edited offer</button>
+  </form>
 </ion-content>
 

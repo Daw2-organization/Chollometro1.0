@@ -6,6 +6,7 @@ import {LoginPage} from "../pages/login/login";
 import {firebaseConfig} from "./firebase.config";
 import * as firebase from 'firebase';
 import {AuthenticationProvider} from "../providers/authentication/authentication";
+import {TabsPage} from "../pages/tabs/tabs";
 
 
 
@@ -15,6 +16,7 @@ import {AuthenticationProvider} from "../providers/authentication/authentication
 export class MyApp {
 
   rootPage:any = 'LoginPage';
+  //rootPage:any='ChollosPage';
   @ViewChild(Nav) nav: Nav;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
@@ -23,15 +25,15 @@ export class MyApp {
     //metemos esto aqui porque peta diciendo: Firebase: No Firebase App '[DEFAULT]' has been created
     firebase.initializeApp(firebaseConfig);
     //observable para cambios en el estado de la autenticacion del usuario
-    // const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-    //   if (!user) {
-    //     this.rootPage = 'LoginPage';
-    //     unsubscribe();
-    //   } else {
-    //     this.rootPage = TabsPage;
-    //     unsubscribe();
-    //   }
-    // });
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+       if (!user) {
+         this.rootPage = 'LoginPage';
+         unsubscribe();
+       } else {
+         this.rootPage = TabsPage;
+         unsubscribe();
+       }
+     });
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

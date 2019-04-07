@@ -4,6 +4,9 @@ import {ChollosProvider} from "../../providers/chollos/chollos";
 import {ChollosPage} from "../chollos/chollos";
 import {CholloEditPage} from "../chollo-edit/chollo-edit";
 import {AuthenticationProvider} from "../../providers/authentication/authentication";
+import * as firebase from 'firebase';
+
+
 
 /**
  * Generated class for the CholloDetailPage page.
@@ -22,6 +25,7 @@ export class CholloDetailPage {
   chollo : any = {};
   id : any;
   name : any;
+  currentUser : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public provChollo: ChollosProvider,
@@ -30,6 +34,7 @@ export class CholloDetailPage {
               public modal : ModalController,
               public authProvider: AuthenticationProvider){
               this.id = navParams.data;
+              this.currentUser = firebase.auth().currentUser.uid;
 
   }
 
@@ -54,49 +59,11 @@ export class CholloDetailPage {
       .then(() => loader.dismiss());
   }
 
-  //Eliminar chollo
-  removeChollo(id : any){
-    this.provChollo.removeChollo(id);
-    this.navCtrl.setRoot(ChollosPage)
-  }
-
   getUserName(){
     this.authProvider.getUserName(this.chollo.userID)
       .then( (snapshot) => {
         this.name = snapshot.userName;
       })
-
   }
 
-  //Editar chollo
-  openModal(){
-    const a = this.modal.create(CholloEditPage, { chollo : this.chollo, id : this.id });
-    a.present();
-  }
-
-  //Mensaje de confirmación para eliminar un chollo
-  presentConfirmation(){
-    let dialog = this.alert.create({
-      title: 'Delete offer',
-      message: 'Do you really want to delete the offer?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-            // alert.dismiss();
-          }
-        },
-        {
-          text: 'Delete',
-          handler: () => {
-            this.removeChollo(this.id);
-            console.log("Delete clicked.");
-          }
-        }
-      ]
-    });
-    dialog.present();
-  }
 }

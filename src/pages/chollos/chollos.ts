@@ -33,10 +33,10 @@ export class ChollosPage {
   //se ha subido a la base de datos.
 
   ionViewWillEnter() {
-    this.doSomething()
+    this.getOffers()
   }
 
-  doSomething() {
+  getOffers() {
     let loader = this.loadingController.create({
       content: "Loading the best offers"
     });
@@ -67,6 +67,14 @@ export class ChollosPage {
       .then(()=>console.log(this.chollitos));
   }
 
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 1000);
+  }
 
   getUserName(uid: any): Promise<string> {
     return this.authProvider.getUserName(uid)
