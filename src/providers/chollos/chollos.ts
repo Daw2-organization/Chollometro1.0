@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import * as firebase from "firebase";
 import {Chollo} from "../../models/chollo";
 import {AngularFireDatabase} from "@angular/fire/database";
@@ -36,9 +36,9 @@ export class ChollosProvider {
   }
 
 
-  updateChollo(chollo : Chollo, id : any){
+  updateChollo(chollo: Chollo, id: any) {
     let data = {
-      title : chollo.title,
+      title: chollo.title,
       desc: chollo.desc,
       url: chollo.url,
       date: chollo.date,
@@ -59,7 +59,7 @@ export class ChollosProvider {
   }
 
 
-  removeChollo(id: any){
+  removeChollo(id: any) {
     firebase
       .database()
       .ref()
@@ -86,7 +86,6 @@ export class ChollosProvider {
         return snapshot.val()
       });
   }
-
 }
 
 

@@ -20,12 +20,20 @@
                    [class.invalid]="!signupForm.controls.email.valid && blur">
         </ion-input>
       </ion-item>
+      <ion-item class="error-message"
+        *ngIf="!signupForm.controls['email'].valid && signupForm.controls['email'].touched">
+        <ion-label>Please enter a valid email (format: something@something.something).</ion-label>
+      </ion-item>
 
       <ion-item>
         <ion-label stacked>Password</ion-label>
         <ion-input formControlName="password" type="password" placeholder="Your password"
                    [class.invalid]="!signupForm.controls.password.valid && blur">
         </ion-input>
+      </ion-item>
+      <ion-item class="error-message"
+                *ngIf="!signupForm.controls['password'].valid && signupForm.controls['password'].touched">
+        <ion-label>Your password must be at least 6 characters long.</ion-label>
       </ion-item>
 
       <ion-item>
@@ -34,12 +42,20 @@
                    [class.invalid]="!signupForm.controls.passwordConfirm.valid && blur">
         </ion-input>
       </ion-item>
+      <ion-item class="error-message"
+                *ngIf="!signupForm.controls['passwordConfirm'].valid && signupForm.controls['passwordConfirm'].touched">
+        <ion-label>Your passwords dont match.</ion-label>
+      </ion-item>
 
       <ion-item>
         <ion-label stacked>UserName (To be displayed within the app)</ion-label>
         <ion-input formControlName="userName" type="text" placeholder="Your Username"
                    [class.invalid]="!signupForm.controls.userName.valid && blur">
         </ion-input>
+      </ion-item>
+      <ion-item class="error-message"
+                *ngIf="!signupForm.controls['userName'] && signupForm.controls['userName'].touched">
+        <ion-label>Sorry! the username is either too short or already taken.</ion-label>
       </ion-item>
 
       <ion-item>

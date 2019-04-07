@@ -6,6 +6,7 @@ import {LoginPage} from "../pages/login/login";
 import {firebaseConfig} from "./firebase.config";
 import * as firebase from 'firebase';
 import {AuthenticationProvider} from "../providers/authentication/authentication";
+import {TabsPage} from "../pages/tabs/tabs";
 
 
 
@@ -24,6 +25,7 @@ export class MyApp {
     firebase.initializeApp(firebaseConfig);
     //observable para cambios en el estado de la autenticacion del usuario
     // const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+    //   console.log(firebase.auth().currentUser.uid);
     //   if (!user) {
     //     this.rootPage = 'LoginPage';
     //     unsubscribe();

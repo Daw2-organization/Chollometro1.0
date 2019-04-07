@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AuthenticationProvider } from "../../providers/authentication/authentication";
 import { EmailValidator } from '../../validators/email';
 import { UsernameValidator } from "../../validators/username";
+import { ConfirmPasswordValidator } from '../../validators/password';
 import {TabsPage} from "../tabs/tabs";
 
 /**
@@ -35,9 +36,14 @@ export class SignupPage {
       password: ['',
         Validators.compose([Validators.minLength(6), Validators.required])],
       passwordConfirm: ['',
-        Validators.compose([Validators.minLength(6), Validators.required])],
+        Validators.compose([Validators.minLength(6), ConfirmPasswordValidator.checkConfirmPassword, Validators.required])],
       userName: ['',
-        Validators.compose([Validators.minLength(3), UsernameValidator.isValid, Validators.required])],
+        // Validators.compose([Validators.minLength(3), UsernameValidator.isValid, Validators.required])],
+        Validators.compose([Validators.minLength(3),
+          (control: FormControl) => {
+            return UsernameValidator.isValid(control);
+          },
+          Validators.required])],
       name: ['',
         Validators.compose([Validators.minLength(3), Validators.required])],
       surname: ['',
@@ -78,5 +84,6 @@ export class SignupPage {
       this.loading.present();
     }
   }
+
 
 }
