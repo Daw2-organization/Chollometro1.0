@@ -16,6 +16,7 @@ import {TabsPage} from "../pages/tabs/tabs";
 export class MyApp {
 
   rootPage:any = 'LoginPage';
+  //rootPage:any='ChollosPage';
   @ViewChild(Nav) nav: Nav;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,

@@ -28,6 +28,7 @@ import {CholloEditPage} from "../pages/chollo-edit/chollo-edit";
 import { AuthenticationProvider } from "../providers/authentication/authentication";
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { ImageProvider } from '../providers/image/image';
+import {MyOffersPage} from "../pages/my-offers/my-offers";
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ImageProvider } from '../providers/image/image';
     UploadPage,
     UserProfilePage,
     CholloDetailPage,
-    CholloEditPage
+    CholloEditPage,
+    MyOffersPage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import { ImageProvider } from '../providers/image/image';
     UploadPage,
     CholloDetailPage,
     UserProfilePage,
-    CholloEditPage
+    CholloEditPage,
+    MyOffersPage
   ],
   providers: [
     StatusBar,

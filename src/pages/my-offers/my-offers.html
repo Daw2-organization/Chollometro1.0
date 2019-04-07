@@ -1,17 +1,10 @@
-<!--
-  Generated template for the ChollosPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
 <ion-header>
   <ion-navbar>
-    <ion-title text-center>Today's best offers</ion-title>
+    <ion-title text-center>My offers</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="hola">
+<ion-content padding>
 
   <!--
   <ion-segment>
@@ -22,7 +15,7 @@
       Más valoradas
     </ion-segment-button>
   </ion-segment>
--->
+  -->
 
   <ion-refresher (ionRefresh)="doRefresh($event);">
     <ion-refresher-content
@@ -31,17 +24,9 @@
       refreshingSpinner="crescent">
     </ion-refresher-content>
   </ion-refresher>
+
   <ion-card class="ayy" *ngFor="let chollo of chollitos">
-    <ion-card-content (click)="goToCholloDetail(chollo?.id)">
-      <ion-item>
-        <ion-avatar item-left>
-          <img src="../../assets/imgs/user.png">
-        </ion-avatar>
-        <ion-row>
-          {{chollo?.userName}}
-          {{chollo?.date}}
-        </ion-row>
-      </ion-item>
+    <ion-card-content (click)="goToCholloDetail()">
       <img src="../../assets/imgs/offer.jpg"/>
       <ion-card-title>
         {{chollo?.title}}
@@ -58,11 +43,13 @@
       <ion-icon name="flame"></ion-icon>
       <div>Popularidad 30%</div>
     </button>
+
+    <div>
+      <ion-row>
+        <button color="secondary" ion-button (click)="openModal()"><ion-icon name="create"></ion-icon></button>
+        <button color="secondary" ion-button (click)="removeChollo()" ><ion-icon name="trash"></ion-icon></button>
+      </ion-row>
+    </div>
   </ion-card>
-
-  <ion-fab bottom right>
-    <button ion-fab color="Warning" (click)="goToUploadPage()">+</button>
-  </ion-fab>
-
 
 </ion-content>

@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import * as firebase from "firebase";
 import {Chollo} from "../../models/chollo";
 import {AngularFireDatabase} from "@angular/fire/database";
+import {visitValue} from "@angular/compiler/src/util";
 
 /*
   Generated class for the ChollosProvider provider.
@@ -33,27 +34,16 @@ export class ChollosProvider {
       .child('chollos')
       .push(key)
       .set(chollo)
+    console.log("Update ok")
   }
 
 
-  updateChollo(chollo: Chollo, id: any) {
-    let data = {
-      title: chollo.title,
-      desc: chollo.desc,
-      url: chollo.url,
-      date: chollo.date,
-      userID: chollo.userID
-    }
-    console.log('updating chollo: ', id);
-    console.log("User id :" + chollo.userID);
-    console.log(chollo);
+  updateChollo(chollo : Chollo, id : any){
+
     firebase
       .database()
-      //.ref(`/chollos/${id}`)
-      .ref()
-      .child('chollos')
-      .child(id)
-      .set(data)
+      .ref(`/chollos/${id}`)
+      .update(chollo)
       .then(() => console.log("Offer updated"),
         () => console.error("Error while updating the offer"))
   }
@@ -73,7 +63,10 @@ export class ChollosProvider {
       .ref('/chollos')
       .once('value')
       .then((snapshot) => {
-        return snapshot.val()
+        return snapshot.val();
+      }, (errData)=>{
+        console.log("Error");
+        console.log(errData);
       });
   }
 
@@ -83,9 +76,27 @@ export class ChollosProvider {
       .ref(`/chollos/${id}`)
       .once("value")
       .then((snapshot) => {
-        return snapshot.val()
+        console.log("Offers retrieved correctly");
+        return snapshot.val();
+      }, (errData)=>{
+        console.log("Error");
+        console.log(errData);
       });
   }
+
+  getUserOffers() : Promise <any>{
+      return firebase
+        .database()
+        .ref('/chollos')
+        .orderByChild('userID')
+        .equalTo(firebase.auth().currentUser.uid)
+        .once("value")
+        .then( value =>  {
+          return value.val()},
+          value => {
+          console.log("Error retrieving  the user Offers")}
+          );
+    }
 }
 
 

@@ -33,10 +33,10 @@ export class ChollosPage {
   //se ha subido a la base de datos.
 
   ionViewWillEnter() {
-    this.doSomething()
+    this.getOffers()
   }
 
-  doSomething() {
+  getOffers() {
     let loader = this.loadingController.create({
       content: "Loading the best offers"
     });
@@ -49,7 +49,6 @@ export class ChollosPage {
         for (let k in snapshot) {
           this.getUserName(snapshot[k].userID).then(
             value => {
-              console.log("---> ", value)
               this.chollitos.push({
                   id: k,
                   title: snapshot[k].title,
@@ -68,11 +67,18 @@ export class ChollosPage {
       .then(()=>console.log(this.chollitos));
   }
 
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 1000);
+  }
 
   getUserName(uid: any): Promise<string> {
     return this.authProvider.getUserName(uid)
       .then((snapshot) => {
-        console.log(snapshot.userName);
         return snapshot.userName;
       }, () => {
         return "Esto ha explotado"
