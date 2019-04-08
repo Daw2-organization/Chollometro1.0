@@ -26,7 +26,7 @@
   </ion-refresher>
 
   <ion-card class="ayy" *ngFor="let chollo of chollitos">
-    <ion-card-content (click)="goToCholloDetail()">
+    <ion-card-content (click)="goToCholloDetail(chollo?.id)">
       <img src="../../assets/imgs/offer.jpg"/>
       <ion-card-title>
         {{chollo?.title}}
@@ -46,8 +46,8 @@
 
     <div>
       <ion-row>
-        <button color="secondary" ion-button (click)="openModal()"><ion-icon name="create"></ion-icon></button>
-        <button color="secondary" ion-button (click)="removeChollo()" ><ion-icon name="trash"></ion-icon></button>
+        <button color="secondary" ion-button (click)="openModal(chollo?.id)"><ion-icon name="create"></ion-icon></button>
+        <button color="secondary" ion-button (click)="presentConfirmation(chollo?.id)" ><ion-icon name="trash"></ion-icon></button>
       </ion-row>
     </div>
   </ion-card>

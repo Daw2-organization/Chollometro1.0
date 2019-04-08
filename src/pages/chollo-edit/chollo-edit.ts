@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ModalController, ViewController, ToastController} from 'ionic-angular';
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ModalController,
+  ViewController,
+  ToastController,
+  LoadingController
+} from 'ionic-angular';
 import {ChollosProvider} from "../../providers/chollos/chollos";
 import {Chollo} from "../../models/chollo";
-import {CholloDetailPage} from "../chollo-detail/chollo-detail";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {EmailValidator} from "../../validators/email";
-import {UsernameValidator} from "../../validators/username";
 
 /**
  * Generated class for the CholloEditPage page.
@@ -30,7 +35,8 @@ export class CholloEditPage {
               public cholloService : ChollosProvider, public toast : ToastController,
               public formBuilder : FormBuilder,
               public modal : ModalController,
-              public provChollo : ChollosProvider) {
+              public provChollo : ChollosProvider,
+              public loadingController: LoadingController) {
 
 
     this.updateForm = formBuilder.group({
@@ -42,23 +48,30 @@ export class CholloEditPage {
         Validators.compose([Validators.minLength(6), Validators.required])],
       });
 
-    this.id = navParams.data;
-
+    this.id = navParams.get('id');
   }
 
   ionViewWillLoad() {
-    this.chollazo = this.navParams.get('chollo');
-    this.id = this.navParams.get('id');
+    let loader = this.loadingController.create({
+      content: "Cargando chollo"
+    });
+    loader.present()
+    this.provChollo.getCholloDetail(this.id)
+      .then((snapshot) => {
+        this.chollazo = {
+          title: snapshot.title,
+          desc: snapshot.desc,
+          url: snapshot.url,
+          userID: snapshot.userID,
+          date: snapshot.date
+        }
+      })
+      .then(() => loader.dismiss());
   }
 
   closeModal(){
-    this.view.dismiss();
-  }
-
-  getChollo(){
-    this.provChollo.getCholloDetail(this.id).then( (data) => {
-
-    } )
+    this.view.dismiss()
+      .then(()=> console.log("Modal closed"))
   }
 
 
@@ -80,7 +93,8 @@ export class CholloEditPage {
       duration: 3000,
       position: 'top'
     });
-    notif.present();
+    notif.present()
+      .then(()=> console.log("Notification showed"))
 
   }
 

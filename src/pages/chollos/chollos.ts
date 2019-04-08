@@ -25,7 +25,8 @@ export class ChollosPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public loadingController: LoadingController,
-              public provChollo: ChollosProvider, private authProvider: AuthenticationProvider) {
+              public provChollo: ChollosProvider,
+              private authProvider: AuthenticationProvider) {
   }
 
 
@@ -64,7 +65,7 @@ export class ChollosPage {
 
       })
       .then(() => loader.dismiss())
-      .then(()=>console.log(this.chollitos));
+      .then(()=>console.log("aaaa",this.chollitos));
   }
 
   doRefresh(refresher) {
@@ -90,7 +91,8 @@ export class ChollosPage {
   }
 
 
-  goToCholloDetail(id: any) {
-    this.navCtrl.push(CholloDetailPage,id);
+  goToCholloDetail(id : string) {
+    console.log("THischollitosid", id);
+    this.navCtrl.push(CholloDetailPage, id);
   }
 }

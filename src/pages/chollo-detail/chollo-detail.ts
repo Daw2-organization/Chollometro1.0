@@ -34,12 +34,12 @@ export class CholloDetailPage {
               public modal : ModalController,
               public authProvider: AuthenticationProvider){
               this.id = navParams.data;
+              console.log("This id: ", this.id);
               this.currentUser = firebase.auth().currentUser.uid;
 
   }
 
   ionViewDidLoad() {
-    console.log();
     let loader = this.loadingController.create({
       content: "Cargando chollo"
     });
@@ -54,6 +54,7 @@ export class CholloDetailPage {
           userID: snapshot.userID,
           date: snapshot.date
         }
+        console.log("id : ", this.id);
         this.getUserName();
       })
       .then(() => loader.dismiss());
