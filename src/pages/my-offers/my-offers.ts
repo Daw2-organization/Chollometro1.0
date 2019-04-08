@@ -27,17 +27,14 @@ import {CholloEditPage} from "../chollo-edit/chollo-edit";
 export class MyOffersPage {
 
   public chollitos : any = [];
-  id : any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public loadingController : LoadingController,
               public provChollo : ChollosProvider,
-              public authProvider : AuthenticationProvider,
               public alert : AlertController,
               public modal : ModalController,
               public menuCtrl: MenuController) {
-        this.id = navParams.data;
   }
 
   ionViewDidEnter(){
@@ -60,10 +57,10 @@ export class MyOffersPage {
   }
 
   //Eliminar chollo
-  removeChollo(){
-    this.presentConfirmation();
-    // this.provChollo.removeChollo(this.id);
-    // this.navCtrl.setRoot(ChollosPage)
+  removeChollo(id : string){
+    console.log("ID for removing", id);
+    this.provChollo.removeChollo(id);
+    this.navCtrl.setRoot(MyOffersPage);
   }
 
   getMyChollos(){
@@ -85,12 +82,36 @@ export class MyOffersPage {
         )
       }
     });
-      loader.dismiss();
-      console.log("Chollitos: ",this.chollitos);
+    loader.dismiss();
+    console.log("Chollitos: ",this.chollitos);
   }
 
+/**
+  getMyChollos(){
+    let loader = this.loadingController.create({
+      content: "Loading the best offers"
+    });
+    loader.present();
+    this.provChollo.getUserOffers()
+      .then( (snapshot) => {
+        this.chollitos = [];
+        for(let k in snapshot){
+          this.chollitos.push({
+            id: k,
+            title : snapshot[k].title,
+            desc : snapshot[k].desc,
+            url : snapshot[k].url,
+            date : snapshot[k].date,
+            userID : snapshot[k].userID
+          })
+        }
+      })
+      .then(()=> loader.dismiss())
+      .then(()=> console.log("getMyChollos FUCNT", this.chollitos))
+  } */
+
   //Mensaje de confirmación para eliminar un chollo
-  presentConfirmation(){
+  presentConfirmation(id : string){
     let dialog = this.alert.create({
       title: 'Delete offer',
       message: 'Do you really want to delete the offer?',
@@ -106,6 +127,7 @@ export class MyOffersPage {
         {
           text: 'Delete',
           handler: () => {
+            this.removeChollo(id);
             console.log("Delete clicked.");
             console.log(this.id);
             // this.provChollo.removeChollo(this.id);
@@ -117,14 +139,15 @@ export class MyOffersPage {
     });
     dialog.present();
   }
+
   //Editar chollo
-  openModal(){
-    const a = this.modal.create(CholloEditPage, { chollo : this.chollitos, id : this.id });
+  openModal(id : any){
+    const a = this.modal.create(CholloEditPage, { id : id});
     a.present();
   }
 
-  goToCholloDetail() {
-    this.navCtrl.push(CholloDetailPage,this.id);
+  goToCholloDetail(id : string) {
+    this.navCtrl.push(CholloDetailPage,id);
   }
 
 }

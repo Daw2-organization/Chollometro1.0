@@ -19,6 +19,8 @@ export class ChollosProvider {
     console.log('Hello ChollosProvider Provider');
   }
 
+
+  //Sube un chollo
   uploadChollo(chollo: Chollo) {
 
     let key = firebase
@@ -38,6 +40,7 @@ export class ChollosProvider {
   }
 
 
+  //Actualiza un chollo
   updateChollo(chollo : Chollo, id : any){
 
     firebase
@@ -49,17 +52,20 @@ export class ChollosProvider {
   }
 
 
-  removeChollo(id: any) {
+  //Elimina un chollo
+  removeChollo(id: any){
     firebase
       .database()
-      .ref()
-      .child(`/chollos/${id}`)
+      .ref(`/chollos/${id}`)
       .remove()
       .then(() => console.log("Offer deleted"))
   }
 
+
+  //todos los chollos
   getChollos() {
-    return firebase.database()
+    return firebase
+      .database()
       .ref('/chollos')
       .once('value')
       .then((snapshot) => {
@@ -70,19 +76,40 @@ export class ChollosProvider {
       });
   }
 
+  //Detalles de un único chollo
   getCholloDetail(id: any) {
     return firebase
       .database()
       .ref(`/chollos/${id}`)
       .once("value")
       .then((snapshot) => {
-        console.log("Offers retrieved correctly");
-        return snapshot.val();
+        return snapshot.val()
+      });
+  }
+
+  //Chollos de un usuario
+  /**
+  getUserOffers() {
+    return firebase
+      .database()
+      .ref(`chollos`)
+      .orderByChild('userID')
+      .equalTo(firebase.auth().currentUser.uid)
+      .on("value", (data) => {
+        console.log("Array de chollos del user: ", data.val())
+        return data.val();
+      })
+
+
+      .once("value", (data) => {
+        console.log("Ligma",data.val());
+        return data;
       }, (errData)=>{
         console.log("Error");
         console.log(errData);
       });
-  }
+       */
+
 
   getUserOffers() : Promise <any>{
       return firebase
