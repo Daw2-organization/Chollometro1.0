@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, LoadingController, NavParams, MenuController} from 'ionic-angular';
 import { UploadPage } from "../upload/upload";
 import { ChollosProvider } from "../../providers/chollos/chollos"
 import {visitValue} from "@angular/compiler/src/util";
@@ -25,12 +25,18 @@ export class ChollosPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public loadingController: LoadingController,
-              public provChollo: ChollosProvider, private authProvider: AuthenticationProvider) {
+              public provChollo: ChollosProvider, private authProvider: AuthenticationProvider,
+              public menuCtrl: MenuController)
+  {
   }
 
 
   //Usamos ionViewWillEnter para que cuando creas un chollo  te devuelva a ChollosPage y te cargue el nuevo chollo que
   //se ha subido a la base de datos.
+
+  ionViewDidEnter(){
+    this.menuCtrl.enable(false, 'myMenu');
+  }
 
   ionViewWillEnter() {
     this.getOffers()

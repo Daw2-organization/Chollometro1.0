@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ModalController, ViewController, ToastController} from 'ionic-angular';
+import {
+  IonicPage, NavController, NavParams, ModalController, ViewController, ToastController,
+  MenuController
+} from 'ionic-angular';
 import {ChollosProvider} from "../../providers/chollos/chollos";
 import {Chollo} from "../../models/chollo";
 import {CholloDetailPage} from "../chollo-detail/chollo-detail";
@@ -30,7 +33,8 @@ export class CholloEditPage {
               public cholloService : ChollosProvider, public toast : ToastController,
               public formBuilder : FormBuilder,
               public modal : ModalController,
-              public provChollo : ChollosProvider) {
+              public provChollo : ChollosProvider, public menuCtrl: MenuController)
+  {
 
 
     this.updateForm = formBuilder.group({
@@ -44,6 +48,10 @@ export class CholloEditPage {
 
     this.id = navParams.data;
 
+  }
+
+  ionViewDidEnter(){
+    this.menuCtrl.enable(false, 'myMenu');
   }
 
   ionViewWillLoad() {

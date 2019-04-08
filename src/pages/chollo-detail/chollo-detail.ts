@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController, NavParams, AlertController, ModalController } from 'ionic-angular';
+import {
+  IonicPage, NavController, LoadingController, NavParams, AlertController, ModalController,
+  MenuController
+} from 'ionic-angular';
 import {ChollosProvider} from "../../providers/chollos/chollos";
 import {ChollosPage} from "../chollos/chollos";
 import {CholloEditPage} from "../chollo-edit/chollo-edit";
@@ -32,10 +35,14 @@ export class CholloDetailPage {
               public loadingController: LoadingController,
               public alert : AlertController,
               public modal : ModalController,
-              public authProvider: AuthenticationProvider){
+              public authProvider: AuthenticationProvider, public menuCtrl: MenuController)
+  {
               this.id = navParams.data;
               this.currentUser = firebase.auth().currentUser.uid;
+  }
 
+  ionViewDidEnter(){
+    this.menuCtrl.enable(false, 'myMenu');
   }
 
   ionViewDidLoad() {

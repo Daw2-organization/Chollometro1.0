@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, normalizeURL, ToastController} from 'ionic-angular';
+import {MenuController, NavController, NavParams, normalizeURL, ToastController} from 'ionic-angular';
 import { Chollo} from "../../models/chollo";
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { ChollosProvider } from "../../providers/chollos/chollos";
@@ -26,15 +26,19 @@ export class UploadPage {
 
   constructor(private ChollosService: ChollosProvider, public navCtrl: NavController,
               public navParams: NavParams, public imagePicker: ImagePicker,
-              public toastCtrl: ToastController
-              ) {
+              public toastCtrl: ToastController, public menuCtrl: MenuController
+              )
+  {
+  }
 
+  ionViewDidEnter(){
+    this.menuCtrl.enable(false, 'myMenu');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UploadPage');
   }
-  
+
    uploadChollo(chollo: Chollo){
     chollo.userID = firebase.auth().currentUser.uid;
     chollo.date = new Date().toLocaleDateString();

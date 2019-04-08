@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
+import {
+  IonicPage, NavController, NavParams, Loading, LoadingController, AlertController,
+  MenuController
+} from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { EmailValidator } from '../../validators/email';
 import { AuthenticationProvider } from "../../providers/authentication/authentication";
@@ -25,8 +28,10 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public loadingCtrl: LoadingController, public alertCtrl: AlertController,
-              public authProvider: AuthenticationProvider, public formBuilder: FormBuilder)
+              public authProvider: AuthenticationProvider, public formBuilder: FormBuilder,
+              public menuCtrl: MenuController)
   {
+
     //https://angular.io/api/forms/FormBuilder --> formBuilders, locuras
     this.loginForm = formBuilder.group({
       email: ['',
@@ -34,6 +39,10 @@ export class LoginPage {
       password: ['',
         Validators.compose([Validators.minLength(6), Validators.required])]
     });
+  }
+
+  ionViewDidEnter(){
+    this.menuCtrl.enable(false, 'myMenu');
   }
 
   ionViewDidLoad() {

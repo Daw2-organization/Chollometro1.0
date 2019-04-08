@@ -23,11 +23,6 @@ export class AuthenticationProvider {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then( newUser => {
-        // console.log(email);
-        // console.log(password);
-        // console.log(userName);
-        // console.log(name);
-        // console.log(surname);
         firebase
           .database()
           .ref()
@@ -60,21 +55,21 @@ export class AuthenticationProvider {
       })
   }
 
-  userExists(userName: string){
-    console.log("estoy en userExists2");
-    firebase
-      .database()
-      .ref(`users`)
-      .orderByChild('userName')
-      .equalTo(userName)
-      .on("value", (data) => {
-        console.log(data);
-        return true;
-      }, (errData)=>{
-        console.log("Error");
-        console.log(errData);
-        return false;
-      });
-  }
+  // userExists(userName: string){
+  //   console.log("estoy en userExists2");
+  //   firebase
+  //     .database()
+  //     .ref(`users`)
+  //     .orderByChild('userName')
+  //     .equalTo(userName)
+  //     .on("value", (data) => {
+  //       console.log(data);
+  //       return true;
+  //     }, (errData)=>{
+  //       console.log("Error");
+  //       console.log(errData);
+  //       return false;
+  //     });
+  // }
 
 }

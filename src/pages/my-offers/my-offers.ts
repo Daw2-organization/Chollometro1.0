@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, LoadingController, ModalController, NavController, NavParams} from 'ionic-angular';
+import {
+  AlertController, IonicPage, LoadingController, MenuController, ModalController, NavController,
+  NavParams
+} from 'ionic-angular';
 import {ChollosProvider} from "../../providers/chollos/chollos";
 import AuthProvider = firebase.auth.AuthProvider;
 import {AuthenticationProvider} from "../../providers/authentication/authentication";
@@ -32,8 +35,13 @@ export class MyOffersPage {
               public provChollo : ChollosProvider,
               public authProvider : AuthenticationProvider,
               public alert : AlertController,
-              public modal : ModalController) {
+              public modal : ModalController,
+              public menuCtrl: MenuController) {
         this.id = navParams.data;
+  }
+
+  ionViewDidEnter(){
+    this.menuCtrl.enable(false, 'myMenu');
   }
 
   ionViewDidLoad() {
@@ -54,8 +62,8 @@ export class MyOffersPage {
   //Eliminar chollo
   removeChollo(){
     this.presentConfirmation();
-    this.provChollo.removeChollo(this.id);
-    this.navCtrl.setRoot(ChollosPage)
+    // this.provChollo.removeChollo(this.id);
+    // this.navCtrl.setRoot(ChollosPage)
   }
 
   getMyChollos(){
@@ -75,10 +83,8 @@ export class MyOffersPage {
             userID: value[k].userID
           }
         )
-
       }
     });
-
       loader.dismiss();
       console.log("Chollitos: ",this.chollitos);
   }
@@ -100,8 +106,11 @@ export class MyOffersPage {
         {
           text: 'Delete',
           handler: () => {
-            this.removeChollo();
             console.log("Delete clicked.");
+            console.log(this.id);
+            // this.provChollo.removeChollo(this.id);
+            // this.navCtrl.setRoot(ChollosPage);
+            // this.removeChollo();
           }
         }
       ]

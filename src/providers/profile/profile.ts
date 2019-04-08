@@ -25,18 +25,13 @@ export class ProfileProvider {
   }
 
   getUserData(){
-
-    // console.log("getUserData");
-
     return firebase
       .database()
       .ref('/users')
       .child(firebase.auth().currentUser.uid)
       .once('value')
       .then((snapshot) => {
-        //console.log(snapshot.key);
-        //console.log(firebase.auth().currentUser.uid);
-        //console.log(snapshot);
+        // console.log(snapshot.val());
         return snapshot.val();
       });
   }

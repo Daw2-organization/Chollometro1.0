@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, MenuController, NavController, NavParams} from 'ionic-angular';
 
 /**
  * Generated class for the UserUpdateModalPage page.
@@ -8,14 +8,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: "UserUpdateModalPage"
+})
 @Component({
   selector: 'page-user-update-modal',
   templateUrl: 'user-update-modal.html',
 })
 export class UserUpdateModalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public menuCtrl: MenuController)
+  {
+
+  }
+
+  ionViewDidEnter(){
+    this.menuCtrl.enable(false, 'myMenu');
   }
 
   ionViewDidLoad() {

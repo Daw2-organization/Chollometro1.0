@@ -1,3 +1,18 @@
+:host {
+  ion-list {
+    margin-top: 24px;
+    p {
+      font-size: 12px;
+      font-weight: 400;
+      padding-bottom: 4px;
+    };
+    h2 {
+      font-weight: 400;
+      opacity: .5;
+    }
+  }
+}
+
 .profile-item {
   text-align: center;
 }
@@ -9,7 +24,7 @@
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  margin: 0 auto;
+  margin: 5% auto;
   width: 128px;
   height: 128px;
   overflow: hidden;
@@ -29,4 +44,9 @@
 
 .menu{
   --width: 20%;
+}
+
+//esto soluciona el cuadrado gris que aparecia por la cara arriba a la izq.
+.scroll-content{
+  overflow-y: auto !important;
 }

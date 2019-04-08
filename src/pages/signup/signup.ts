@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
+import {
+  IonicPage, NavController, NavParams, Loading, LoadingController, AlertController,
+  MenuController
+} from 'ionic-angular';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AuthenticationProvider } from "../../providers/authentication/authentication";
 import { EmailValidator } from '../../validators/email';
@@ -28,7 +31,8 @@ export class SignupPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public authProvider: AuthenticationProvider, public formBuilder: FormBuilder,
-              public loadingCtrl: LoadingController, public alertCtrl: AlertController)
+              public loadingCtrl: LoadingController, public alertCtrl: AlertController,
+              public menuCtrl: MenuController)
   {
     this.signupForm = formBuilder.group({
       email: ['',
@@ -38,17 +42,16 @@ export class SignupPage {
       passwordConfirm: ['',
         Validators.compose([Validators.minLength(6), ConfirmPasswordValidator.checkConfirmPassword, Validators.required])],
       userName: ['',
-        // Validators.compose([Validators.minLength(3), UsernameValidator.isValid, Validators.required])],
-        Validators.compose([Validators.minLength(3),
-          (control: FormControl) => {
-            return UsernameValidator.isValid(control);
-          },
-          Validators.required])],
+        Validators.compose([Validators.minLength(3), UsernameValidator.validUsername, Validators.required])],
       name: ['',
         Validators.compose([Validators.minLength(3), Validators.required])],
       surname: ['',
         Validators.compose([Validators.minLength(3), Validators.required])]
     });
+  }
+
+  ionViewDidEnter(){
+    this.menuCtrl.enable(false, 'myMenu');
   }
 
   ionViewDidLoad() {

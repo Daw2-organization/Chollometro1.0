@@ -1,35 +1,36 @@
-import { FormControl } from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import * as firebase from "firebase";
 
 export class UsernameValidator {
+  static validUsername(fc: FormControl) {
+    // console.log(fc);
+    // console.log(fc.value);
 
-  static isValid(control: FormControl){
-    // if(control.value.toLowerCase() === "abc123" || control.value.toLowerCase() === "123abc"){
-    if(this.userExists(control.value)){
-      return (null);
+    //esto deberia ir en el provider pero la funcion es static, por tanto no podemos inyectarlo.
+    //se hace aqui y punto.
+    function userExists(fc: FormControl) {
+      // console.log(fc.value);
+      firebase
+        .database()
+        .ref(`users`)
+        .orderByChild('userName')
+        .equalTo(fc.value)
+        .on("value", (data) => {
+          // console.log(data.val());
+          if (data.val() != null) {
+            //si data contiene algo pues el nombre esta en uso
+            return false;
+          } else {
+            //si data es null el nombre esta disponible
+            return true;
+          }
+        })
+    }
+
+    if (fc.value.toLowerCase() === "abc123" || fc.value.toLowerCase() === "123abc" || !userExists(fc)) {
+      return ({validUsername: true});
     } else {
-      return {
-        validUsername: true
-      };
+      return (null);
     }
   }
-
-  static userExists(userName: string){
-    console.log("estoy en userExists");
-    firebase
-      .database()
-      .ref(`users`)
-      .orderByChild('userName')
-      .equalTo(userName)
-      .on("value", (data) => {
-        console.log(data.val());
-        return true;
-      }, (errData)=>{
-        console.log("Error");
-        console.log(errData);
-        return false;
-      });
-  }
-
 }
-

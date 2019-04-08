@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import {AlertController, NavController, Platform, Nav} from 'ionic-angular';
+import {AlertController, NavController, Platform, Nav, MenuController, ModalController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
@@ -20,7 +20,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-              public alertCtrl: AlertController, private authProvider: AuthenticationProvider) {
+              public alertCtrl: AlertController, private authProvider: AuthenticationProvider,
+              public menuCtrl: MenuController, public modalCtrl: ModalController) {
 
     //metemos esto aqui porque peta diciendo: Firebase: No Firebase App '[DEFAULT]' has been created
     firebase.initializeApp(firebaseConfig);
@@ -43,11 +44,14 @@ export class MyApp {
       splashScreen.hide();
     });
 
+    this.menuCtrl.enable(false, 'myMenu');
+
 
   }
 
   goToUpdateUser(){
-
+    const modal = this.modalCtrl.create('UserUpdateModalPage');
+    modal.present();
   }
 
   presentConfirmation() {
