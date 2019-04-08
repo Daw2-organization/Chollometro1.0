@@ -4,11 +4,7 @@ import {
   NavParams
 } from 'ionic-angular';
 import {ChollosProvider} from "../../providers/chollos/chollos";
-import AuthProvider = firebase.auth.AuthProvider;
-import {AuthenticationProvider} from "../../providers/authentication/authentication";
 import {CholloDetailPage} from "../chollo-detail/chollo-detail";
-import * as firebase from "firebase";
-import {ChollosPage} from "../chollos/chollos";
 import {CholloEditPage} from "../chollo-edit/chollo-edit";
 
 
@@ -34,7 +30,8 @@ export class MyOffersPage {
               public provChollo : ChollosProvider,
               public alert : AlertController,
               public modal : ModalController,
-              public menuCtrl: MenuController) {
+              public menuCtrl: MenuController)
+  {
   }
 
   ionViewDidEnter(){
@@ -129,7 +126,7 @@ export class MyOffersPage {
           handler: () => {
             this.removeChollo(id);
             console.log("Delete clicked.");
-            console.log(this.id);
+            console.log(id);
             // this.provChollo.removeChollo(this.id);
             // this.navCtrl.setRoot(ChollosPage);
             // this.removeChollo();

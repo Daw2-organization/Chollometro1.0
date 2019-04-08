@@ -4,8 +4,6 @@ import {
   MenuController
 } from 'ionic-angular';
 import {ChollosProvider} from "../../providers/chollos/chollos";
-import {ChollosPage} from "../chollos/chollos";
-import {CholloEditPage} from "../chollo-edit/chollo-edit";
 import {AuthenticationProvider} from "../../providers/authentication/authentication";
 import * as firebase from 'firebase';
 

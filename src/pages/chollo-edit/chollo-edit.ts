@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import {
   IonicPage, NavController, NavParams, ModalController, ViewController, ToastController,
-  MenuController
+  MenuController, LoadingController
 } from 'ionic-angular';
-  LoadingController
 import {ChollosProvider} from "../../providers/chollos/chollos";
 import {Chollo} from "../../models/chollo";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -31,10 +30,9 @@ export class CholloEditPage {
               public cholloService : ChollosProvider, public toast : ToastController,
               public formBuilder : FormBuilder,
               public modal : ModalController,
-              public loadingController: LoadingController) {
+              public loadingController: LoadingController,
               public provChollo : ChollosProvider, public menuCtrl: MenuController)
-
-
+{
     this.updateForm = formBuilder.group({
       title: ['',
         Validators.compose([Validators.minLength(4), Validators.required])],
@@ -72,6 +70,7 @@ export class CholloEditPage {
   closeModal(){
     this.view.dismiss()
       .then(()=> console.log("Modal closed"))
+    this.navCtrl.setRoot('MyOffersPage');
   }
 
 
