@@ -2,16 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { User } from "../../models/user";
-// import { Rx } from 'rxjs/Rx';
 import {AngularFireDatabase} from "@angular/fire/database";
-import {map} from "rxjs/operators";
-import {Observable} from "rxjs/Observable";
-/*
-  Generated class for the ProfileProvider provider.
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class ProfileProvider {
 
@@ -36,4 +29,24 @@ export class ProfileProvider {
       });
   }
 
+  updateUserData(email: string, name: string, surname: string, userName: string): Promise<any>  {
+    console.log(email, name, surname, userName);
+
+    return firebase
+      .auth()
+      .currentUser
+      .updateEmail(email)
+      .then( (data) => {
+        firebase
+          .database()
+          .ref(`users`)
+          .child(firebase.auth().currentUser.uid)
+          .update({
+            email: email,
+            name: name,
+            surname: surname,
+            userName: userName
+          })
+      })
+  }
 }

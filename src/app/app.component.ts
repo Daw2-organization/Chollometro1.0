@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import {AlertController, NavController, Platform, Nav, MenuController, ModalController} from 'ionic-angular';
+import {
+  AlertController, Platform, Nav, MenuController, ModalController, Modal
+} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
@@ -15,27 +17,27 @@ import {TabsPage} from "../pages/tabs/tabs";
 })
 export class MyApp {
 
-  rootPage:any = 'LoginPage';
-  //rootPage:any='ChollosPage';
+  rootPage: any=LoginPage;
+
   @ViewChild(Nav) nav: Nav;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               public alertCtrl: AlertController, private authProvider: AuthenticationProvider,
               public menuCtrl: MenuController, public modalCtrl: ModalController) {
-
     //metemos esto aqui porque peta diciendo: Firebase: No Firebase App '[DEFAULT]' has been created
+    //asi que volvemos a inicializarlo.
     firebase.initializeApp(firebaseConfig);
-    //observable para cambios en el estado de la autenticacion del usuario
-    // const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-    //   console.log(firebase.auth().currentUser.uid);
-    //   if (!user) {
-    //     this.rootPage = 'LoginPage';
-    //     unsubscribe();
-    //   } else {
-    //     this.rootPage = TabsPage;
-    //     unsubscribe();
-    //   }
-    // });
+    // observable para cambios en el estado de la autenticacion del usuario
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      console.log(firebase.auth().currentUser.uid);
+      if (!user) {
+        this.rootPage = 'LoginPage';
+        unsubscribe();
+      } else {
+        this.rootPage = TabsPage;
+        unsubscribe();
+      }
+    });
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -43,15 +45,15 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
-
-    this.menuCtrl.enable(false, 'myMenu');
-
-
+    // this.menuCtrl.enable(false, 'myMenu');
   }
 
-  goToUpdateUser(){
-    const modal = this.modalCtrl.create('UserUpdateModalPage');
+  goToUpdateUser() {
+    const modal: Modal = this.modalCtrl.create('UserUpdateModalPage');
     modal.present();
+    modal.onDidDismiss((data) => {
+      console.log(data);
+    });
   }
 
   presentConfirmation() {

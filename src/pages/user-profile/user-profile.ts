@@ -16,7 +16,9 @@ import {LoginPage} from "../login/login";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'UserProfilePage'
+})
 @Component({
   selector: 'page-user-profile',
   templateUrl: 'user-profile.html',

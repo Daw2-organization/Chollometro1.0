@@ -29,6 +29,7 @@ import { AuthenticationProvider } from "../providers/authentication/authenticati
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { ImageProvider } from '../providers/image/image';
 import {MyOffersPage} from "../pages/my-offers/my-offers";
+import {UserProfilePageModule} from "../pages/user-profile/user-profile.module";
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import {MyOffersPage} from "../pages/my-offers/my-offers";
     TabsPage,
     ChollosPage,
     UploadPage,
-    UserProfilePage,
+    // UserProfilePage,
     CholloDetailPage,
     CholloEditPage,
     MyOffersPage
@@ -49,6 +50,7 @@ import {MyOffersPage} from "../pages/my-offers/my-offers";
     AngularFireAuthModule,
     LoginPageModule,
     HttpClientModule,
+    UserProfilePageModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
     Ng2CloudinaryModule,
@@ -62,7 +64,7 @@ import {MyOffersPage} from "../pages/my-offers/my-offers";
     ChollosPage,
     UploadPage,
     CholloDetailPage,
-    UserProfilePage,
+    // UserProfilePage,
     CholloEditPage,
     MyOffersPage
   ],

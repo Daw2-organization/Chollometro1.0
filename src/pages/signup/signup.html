@@ -54,8 +54,8 @@
         </ion-input>
       </ion-item>
       <ion-item class="error-message"
-                *ngIf="signupForm.controls['userName'] && signupForm.controls['userName'].touched">
-        <ion-label>Sorry! the username is either too short or already taken.</ion-label>
+                *ngIf="!signupForm.controls['userName'].valid && signupForm.controls['userName'].touched">
+        <ion-label>Sorry! username is either already taken or too short.</ion-label>
       </ion-item>
 
       <ion-item>
@@ -64,6 +64,10 @@
                    [class.invalid]="!signupForm.controls.name.valid && blur">
         </ion-input>
       </ion-item>
+      <ion-item class="error-message"
+                *ngIf="!signupForm.controls['name'].valid && signupForm.controls['name'].touched">
+        <ion-label>name should be longer than 3 characters.</ion-label>
+      </ion-item>
 
       <ion-item>
         <ion-label stacked>Surname</ion-label>
@@ -71,6 +75,11 @@
                    [class.invalid]="!signupForm.controls.surname.valid && blur">
         </ion-input>
       </ion-item>
+      <ion-item class="error-message"
+                *ngIf="!signupForm.controls['surname'].valid && signupForm.controls['surname'].touched">
+        <ion-label>Surname should be longer than 3 characters.</ion-label>
+      </ion-item>
+
 
       <button ion-button block type="submit" [disabled]="!signupForm.valid">
         Create an Account
