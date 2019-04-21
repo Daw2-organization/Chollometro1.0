@@ -36,16 +36,14 @@ export class MyOffersPage {
 
   ionViewDidEnter(){
     this.menuCtrl.enable(false, 'myMenu');
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MyOffersPage');
     this.getMyChollos();
   }
 
 
+  //Refresca las ofertas del usuario
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
+    this.getMyChollos();
 
     setTimeout(() => {
       console.log('Async operation has ended');
@@ -60,12 +58,13 @@ export class MyOffersPage {
     this.navCtrl.setRoot(MyOffersPage);
   }
 
+
+/**
   getMyChollos(){
     let loader = this.loadingController.create({
       content: "Loading the best offers"
     });
     loader.present();
-
     this.provChollo.getUserOffers().then((value) => {
       for (let k in value) {
         this.chollitos.push({
@@ -82,8 +81,9 @@ export class MyOffersPage {
     loader.dismiss();
     console.log("Chollitos: ",this.chollitos);
   }
+ */
 
-/**
+  //Obtiene los chollos de un usuario
   getMyChollos(){
     let loader = this.loadingController.create({
       content: "Loading the best offers"
@@ -104,8 +104,7 @@ export class MyOffersPage {
         }
       })
       .then(()=> loader.dismiss())
-      .then(()=> console.log("getMyChollos FUCNT", this.chollitos))
-  } */
+  }
 
   //Mensaje de confirmación para eliminar un chollo
   presentConfirmation(id : string){
@@ -127,9 +126,6 @@ export class MyOffersPage {
             this.removeChollo(id);
             console.log("Delete clicked.");
             console.log(id);
-            // this.provChollo.removeChollo(this.id);
-            // this.navCtrl.setRoot(ChollosPage);
-            // this.removeChollo();
           }
         }
       ]
@@ -137,7 +133,7 @@ export class MyOffersPage {
     dialog.present();
   }
 
-  //Editar chollo
+  //Modal para editar un chollo
   openModal(id : any){
     const a = this.modal.create(CholloEditPage, { id : id});
     a.present();

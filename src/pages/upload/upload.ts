@@ -5,6 +5,7 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { ChollosProvider } from "../../providers/chollos/chollos";
 import { ProfileProvider } from "../../providers/profile/profile";
 import * as firebase from 'firebase';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 
 
@@ -22,69 +23,41 @@ import * as firebase from 'firebase';
 })
 export class UploadPage {
 
-    public chollo= {} as Chollo;
+    public chollo = {} as Chollo;
+  public uploadForm: FormGroup;
 
-  constructor(private ChollosService: ChollosProvider, public navCtrl: NavController,
-              public navParams: NavParams, public imagePicker: ImagePicker,
-              public toastCtrl: ToastController, public menuCtrl: MenuController
-              )
-  {
+
+  constructor(private ChollosProv: ChollosProvider, public navCtrl: NavController,
+              public navParams: NavParams,
+              public toastCtrl: ToastController, public menuCtrl: MenuController,
+              public formBuilder : FormBuilder) {
+
+    this.uploadForm = formBuilder.group({
+      title: ['',
+        Validators.compose([Validators.minLength(4), Validators.required])],
+      description: ['',
+        Validators.compose([Validators.minLength(6), Validators.required])],
+      url: ['',
+        Validators.compose([Validators.minLength(6), Validators.required])],
+    });
   }
 
   ionViewDidEnter(){
     this.menuCtrl.enable(false, 'myMenu');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UploadPage');
-  }
 
+    //Sube un chollo a firebase
    uploadChollo(chollo: Chollo){
+    console.log("CholloUpload", this.chollo)
     chollo.userID = firebase.auth().currentUser.uid;
     chollo.date = new Date().toLocaleDateString();
-    this.ChollosService.uploadChollo(chollo);
+    this.ChollosProv.uploadChollo(chollo);
     this.mostrarConfirmacion();
     this.navCtrl.pop();
   }
 
-  // openImagePicker(){
-  //   this.imagePicker.hasReadPermission().then(
-  //     (result) => {
-  //       if(result == false){
-  //         // no callbacks required as this opens a popup which returns async
-  //         this.imagePicker.requestReadPermission();
-  //       }
-  //       else if(result == true){
-  //         this.imagePicker.getPictures({
-  //           maximumImagesCount: 1
-  //         }).then(
-  //           (results) => {
-  //             for (var i = 0; i < results.length; i++) {
-  //               this.uploadImageToFirebase(results[i]);
-  //             }
-  //           }, (err) => console.log(err)
-  //         );
-  //       }
-  //     }, (err) => {
-  //       console.log(err);
-  //     });
-  // }
-
-  // uploadImageToFirebase(image){
-  //   image = normalizeURL(image);
-  //
-  //   //uploads img to firebase storage
-  //   this.myPhotoRef.uploadImage(image)
-  //     .then(photoURL => {
-  //
-  //       let toast = this.toastCtrl.create({
-  //         message: 'Image was updated successfully',
-  //         duration: 3000
-  //       });
-  //       toast.present();
-  //     })
-  // }
-
+    //Muestra confirmación de que se ha subido correctamente el chollo
     mostrarConfirmacion() {
       let notif = this.toastCtrl.create({
         message: 'El chollo se ha creado correctamente',

@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController, LoadingController, NavParams, MenuController} from 'ionic-angular';
 import { UploadPage } from "../upload/upload";
 import { ChollosProvider } from "../../providers/chollos/chollos"
-import {visitValue} from "@angular/compiler/src/util";
 import {CholloDetailPage} from "../chollo-detail/chollo-detail";
 import {AuthenticationProvider} from "../../providers/authentication/authentication";
+
+
+
 
 /**
  * Generated class for the ChollosPage page.
@@ -30,18 +32,15 @@ export class ChollosPage {
   {
   }
 
-
-  //Usamos ionViewWillEnter para que cuando creas un chollo  te devuelva a ChollosPage y te cargue el nuevo chollo que
-  //se ha subido a la base de datos.
-
   ionViewDidEnter(){
     this.menuCtrl.enable(false, 'myMenu');
   }
 
   ionViewWillEnter() {
-    this.getOffers()
+    this.getOffers();
   }
 
+  //Devuelve todas las ofertas que se encuentran en firebase.
   getOffers() {
     let loader = this.loadingController.create({
       content: "Loading the best offers"
@@ -69,25 +68,53 @@ export class ChollosPage {
         }
 
       })
-      .then(() => loader.dismiss())
-      .then(()=>console.log("aaaa",this.chollitos));
+      .then(() => loader.dismiss());
   }
 
+  /**
+   getOffers(){
+    let loader = this.loadingController.create({
+      content: "Loading the best offers"
+    });
+    loader.present().then( ()=> {
+       this.provChollo.getChollos()
+        .subscribe( data => {
+            this.getUserName(data.userID)
+            .then(value => {
+              this.chollitos.push({
+                id: data.id,
+                title: data.title,
+                desc: data.desc,
+                url: data.url,
+                date: data.date,
+                userID: data.userID,
+                userName: value
+              });
+            })
+        });
+      console.log("chollitos",this.chollitos);
+      loader.dismiss().then(() => console.log("Las ofertas se han descargado correctamente"));
+    })
+  }
+
+   */
+
+  //Recarga el feed de la página
   doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
+    this.getOffers();
 
     setTimeout(() => {
-      console.log('Async operation has ended');
       refresher.complete();
     }, 1000);
   }
 
-  getUserName(uid: any): Promise<string> {
+    //Devuelve el nombre de usuario para que aparezca en las tarjetas
+    getUserName(uid : any): Promise<string> {
     return this.authProvider.getUserName(uid)
       .then((snapshot) => {
         return snapshot.userName;
       }, () => {
-        return "Esto ha explotado"
+        return "Error while retrieving userName";
       });
   }
 
@@ -96,8 +123,8 @@ export class ChollosPage {
   }
 
 
-  goToCholloDetail(id : string) {
-    console.log("THischollitosid", id);
+  goToCholloDetails(id : any){
     this.navCtrl.push(CholloDetailPage, id);
   }
+
 }

@@ -24,9 +24,9 @@ import { ProfileProvider } from '../providers/profile/profile';
 import { CholloEditPage } from "../pages/chollo-edit/chollo-edit";
 import { AuthenticationProvider } from "../providers/authentication/authentication";
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
-import { ImageProvider } from '../providers/image/image';
-import { MyOffersPage } from "../pages/my-offers/my-offers";
-import { UserProfilePageModule } from "../pages/user-profile/user-profile.module";
+import {MyOffersPage} from "../pages/my-offers/my-offers";
+import {UserProfilePageModule} from "../pages/user-profile/user-profile.module";
+import {MyOffersPageModule} from "../pages/my-offers/my-offers.module";
 
 
 
@@ -40,8 +40,7 @@ import { UserProfilePageModule } from "../pages/user-profile/user-profile.module
     UploadPage,
     // UserProfilePage,
     CholloDetailPage,
-    CholloEditPage,
-    MyOffersPage
+    CholloEditPage
   ],
   imports: [
     BrowserModule,
@@ -53,6 +52,7 @@ import { UserProfilePageModule } from "../pages/user-profile/user-profile.module
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
     Ng2CloudinaryModule,
+    MyOffersPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -63,8 +63,7 @@ import { UserProfilePageModule } from "../pages/user-profile/user-profile.module
     UploadPage,
     CholloDetailPage,
     // UserProfilePage,
-    CholloEditPage,
-    MyOffersPage
+    CholloEditPage
   ],
   providers: [
     StatusBar,
@@ -73,8 +72,7 @@ import { UserProfilePageModule } from "../pages/user-profile/user-profile.module
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthenticationProvider,
     ChollosProvider,
-    ProfileProvider,
-    ImageProvider
+    ProfileProvider
   ]
 })
 

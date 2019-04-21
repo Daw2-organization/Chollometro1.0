@@ -29,7 +29,7 @@ export class MyApp {
     firebase.initializeApp(firebaseConfig);
     // observable para cambios en el estado de la autenticacion del usuario
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      console.log(firebase.auth().currentUser.uid);
+      //console.log(firebase.auth().currentUser.uid);
       if (!user) {
         this.rootPage = 'LoginPage';
         unsubscribe();

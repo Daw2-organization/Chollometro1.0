@@ -3,8 +3,9 @@ import {Injectable} from '@angular/core';
 import * as firebase from "firebase";
 import {Chollo} from "../../models/chollo";
 import {AngularFireDatabase} from "@angular/fire/database";
-import {visitValue} from "@angular/compiler/src/util";
-
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
+import * as _ from 'lodash';
 /*
   Generated class for the ChollosProvider provider.
 
@@ -76,8 +77,18 @@ export class ChollosProvider {
       });
   }
 
+  /**
+   getChollos() : Observable <any>{
+    return this.fdb.list('/chollos').stateChanges()
+      .pipe(map(chollos => {
+        //console.log('key', chollos.key, 'value', chollos.payload)
+        return _.assign(chollos.payload.val(), {id:chollos.key});
+      }));
+  }
+   */
+
   //Detalles de un único chollo
-  getCholloDetail(id: any) {
+  getCholloDetails(id: any) {
     return firebase
       .database()
       .ref(`/chollos/${id}`)
@@ -87,7 +98,8 @@ export class ChollosProvider {
       });
   }
 
-  //Chollos de un usuario
+
+  //Devuelve los chollos de un usuario
   /**
   getUserOffers() {
     return firebase
@@ -111,6 +123,7 @@ export class ChollosProvider {
        */
 
 
+  //Devuelve los chollos de un usuario
   getUserOffers() : Promise <any>{
       return firebase
         .database()
@@ -124,6 +137,7 @@ export class ChollosProvider {
           console.log("Error retrieving  the user Offers")}
           );
     }
+
 }
 
 

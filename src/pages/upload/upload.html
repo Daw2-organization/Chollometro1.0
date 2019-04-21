@@ -11,28 +11,30 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-item>
-      <ion-label color="primary" floating>Title</ion-label>
-      <ion-input type="text" [(ngModel)]="chollo.title"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="primary" floating>Description</ion-label>
-      <ion-textarea [(ngModel)]="chollo.desc"></ion-textarea>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="primary" floating>Url</ion-label>
-      <ion-input type="text" [(ngModel)]="chollo.url"></ion-input>
-    </ion-item>
-
-    <ion-row>
+    <form [formGroup]="uploadForm" (submit)="uploadChollo(chollo)" novalidate>
       <ion-item>
-        <button ion-button round default color="primary"><ion-icon name="images"></ion-icon></button>
+        <ion-label color="primary" floating>Title</ion-label>
+        <ion-input formControlName="title" type="text" [(ngModel)]="chollo.title" [class.invalid]="uploadForm.controls.title.valid && blur"></ion-input>
       </ion-item>
-    </ion-row>
 
-  <br>
-  
-  <button ion-button block color="primary" (click)="uploadChollo(chollo)">Upload offer</button>
+      <ion-item>
+        <ion-label color="primary" floating>Description</ion-label>
+        <ion-input formControlName="description" type="text" [(ngModel)]="chollo.desc" [class.invalid]="uploadForm.controls.description.valid && blur"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" floating>Url</ion-label>
+        <ion-input formControlName="url" type="text" [(ngModel)]="chollo.url" [class.invalid]="uploadForm.controls.url.valid && blur"></ion-input>
+      </ion-item>
+
+      <ion-row>
+        <ion-item>
+          <button ion-button round default color="primary"><ion-icon name="images"></ion-icon></button>
+        </ion-item>
+      </ion-row>
+
+      <br>
+
+      <button ion-button block color="primary" type="submit">Upload offer</button>
+    </form>
 </ion-content>
