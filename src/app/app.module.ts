@@ -12,24 +12,23 @@ import { firebaseConfig } from "./firebase.config";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {ChollosPage} from "../pages/chollos/chollos";
-import {UploadPage} from "../pages/upload/upload";
-import {LoginPageModule} from "../pages/login/login.module";
+import { ChollosPage } from "../pages/chollos/chollos";
+import { UploadPage } from "../pages/upload/upload";
+import { LoginPageModule } from "../pages/login/login.module";
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { ChollosProvider } from '../providers/chollos/chollos';
-import {HttpClientModule} from "@angular/common/http";
-import { AngularFireDatabase, AngularFireDatabaseModule} from "angularfire2/database";
-import { CholloDetailPage} from "../pages/chollo-detail/chollo-detail";
-import { Cloudinary } from "cloudinary-core";
-import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
-import {UserProfilePage} from "../pages/user-profile/user-profile";
+import { HttpClientModule } from "@angular/common/http";
+import { AngularFireDatabase, AngularFireDatabaseModule } from "angularfire2/database";
+import { CholloDetailPage } from "../pages/chollo-detail/chollo-detail";
 import { ProfileProvider } from '../providers/profile/profile';
-import {CholloEditPage} from "../pages/chollo-edit/chollo-edit";
+import { CholloEditPage } from "../pages/chollo-edit/chollo-edit";
 import { AuthenticationProvider } from "../providers/authentication/authentication";
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { ImageProvider } from '../providers/image/image';
-import {MyOffersPage} from "../pages/my-offers/my-offers";
-import {UserProfilePageModule} from "../pages/user-profile/user-profile.module";
+import { MyOffersPage } from "../pages/my-offers/my-offers";
+import { UserProfilePageModule } from "../pages/user-profile/user-profile.module";
+
+
 
 
 @NgModule({
@@ -54,7 +53,6 @@ import {UserProfilePageModule} from "../pages/user-profile/user-profile.module";
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
     Ng2CloudinaryModule,
-    CloudinaryModule.forRoot({ Cloudinary }, { cloud_name: 'oskitayeduado' } as CloudinaryConfiguration)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
