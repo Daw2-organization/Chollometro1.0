@@ -45,7 +45,7 @@ export class AuthenticationProvider {
     return firebase.auth().signOut();
   }
 
-  getUserName(uid : any){
+   getUserName(uid : any){
     return firebase
       .database()
       .ref(`/users/${uid}`)

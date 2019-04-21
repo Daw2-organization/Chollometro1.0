@@ -7,11 +7,8 @@
 <ion-header>
   <ion-navbar>
     <ion-row>
-      <!--<ion-col>-->
-        <!--<h3>{{chollo?.title}}</h3>-->
-      <!--</ion-col>-->
       <ion-col item-right>
-        <h3>By: {{name}}</h3>
+        <h3>User: {{name}}</h3>
       </ion-col>
     </ion-row>
   </ion-navbar>
@@ -33,17 +30,8 @@
     <ion-input readonly type="text" value="{{chollo?.url}}"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label color="secondary" floating>Date</ion-label>
-    <ion-input color="secondary" readonly value="c{{chollo?.date}}"></ion-input>
+    <ion-label color="secondary" floating>Upload date</ion-label>
+    <ion-input color="secondary" readonly value="{{chollo?.date}}"></ion-input>
   </ion-item>
   <br>
-
-  <!--<ion-col col-md-6>-->
-    <!--<button ion-button default color="secondary" (click)="openModal()"><ion-icon name="create"></ion-icon></button>-->
-  <!--</ion-col>-->
-  <!--<ion-col col-md-6>-->
-    <!--<button ion-button default color="secondary" (click)="presentConfirmation()"><ion-icon name="trash"></ion-icon></button>-->
-  <!--</ion-col>-->
-
-
 </ion-content>

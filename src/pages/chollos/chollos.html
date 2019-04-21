@@ -13,17 +13,6 @@
 
 <ion-content padding class="hola">
 
-  <!--
-  <ion-segment>
-    <ion-segment-button value="vistas">
-      Más vistas
-    </ion-segment-button>
-    <ion-segment-button value="likes">
-      Más valoradas
-    </ion-segment-button>
-  </ion-segment>
--->
-
   <ion-refresher (ionRefresh)="doRefresh($event);">
     <ion-refresher-content
       pullingText="Pull to refresh"
@@ -31,8 +20,9 @@
       refreshingSpinner="crescent">
     </ion-refresher-content>
   </ion-refresher>
+
   <ion-card class="ayy" *ngFor="let chollo of chollitos">
-    <ion-card-content (click)="goToCholloDetail(chollo?.id)">
+    <ion-card-content (click)="goToCholloDetails(chollo.id)">
       <ion-item>
         <ion-avatar item-left>
           <img src="../../assets/imgs/user.png">

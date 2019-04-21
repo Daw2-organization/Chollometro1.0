@@ -1,4 +1,5 @@
 export interface Chollo{
+  id: string;
   title: string;
   desc: string;
   url: string;

@@ -36,7 +36,6 @@ export class CholloDetailPage {
               public authProvider: AuthenticationProvider, public menuCtrl: MenuController)
   {
               this.id = navParams.data;
-              console.log("This id: ", this.id);
               this.currentUser = firebase.auth().currentUser.uid;
   }
 
@@ -49,7 +48,7 @@ export class CholloDetailPage {
       content: "Cargando chollo"
     });
     loader.present()
-    this.provChollo.getCholloDetail(this.id)
+    this.provChollo.getCholloDetails(this.id)
       .then((snapshot) => {
         this.chollo = {
           id: this.id,
@@ -59,12 +58,12 @@ export class CholloDetailPage {
           userID: snapshot.userID,
           date: snapshot.date
         }
-        console.log("id : ", this.id);
         this.getUserName();
       })
       .then(() => loader.dismiss());
   }
 
+  //Devuelve el nombre de usuario propietario del chollo
   getUserName(){
     this.authProvider.getUserName(this.chollo.userID)
       .then( (snapshot) => {

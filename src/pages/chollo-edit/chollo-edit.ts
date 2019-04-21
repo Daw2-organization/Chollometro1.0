@@ -22,7 +22,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class CholloEditPage {
 
 
-  public chollazo : Chollo;
+  public chollazo : any;
   public id : any;
   public updateForm: FormGroup;
 
@@ -54,7 +54,7 @@ export class CholloEditPage {
       content: "Cargando chollo"
     });
     loader.present()
-    this.provChollo.getCholloDetail(this.id)
+    this.provChollo.getCholloDetails(this.id)
       .then((snapshot) => {
         this.chollazo = {
           title: snapshot.title,
@@ -64,16 +64,16 @@ export class CholloEditPage {
           date: snapshot.date
         }
       })
-      .then(() => loader.dismiss());
+      .then( () => loader.dismiss());
   }
 
   closeModal(){
     this.view.dismiss()
       .then(()=> console.log("Modal closed"))
-    this.navCtrl.setRoot('MyOffersPage');
   }
 
 
+  //Método que actualiza un chollo
   updateChollo(){
     this.chollazo.title = this.updateForm.value.title;
     this.chollazo.desc = this.updateForm.value.description;
@@ -82,10 +82,10 @@ export class CholloEditPage {
     this.cholloService.updateChollo(this.chollazo, this.id);
     this.showConfirmation();
     this.closeModal();
-    this.ionViewWillLoad();
 
   }
 
+  //Mostrar confirmación de que el chollo ha sido actualizado
   showConfirmation(){
     let notif = this.toast.create({
       message: 'The offer has been updated',
@@ -95,6 +95,10 @@ export class CholloEditPage {
     notif.present()
       .then(()=> console.log("Notification showed"))
 
+  }
+
+  goToMyOffers(){
+    this.navCtrl.push('MyOffersPage');
   }
 
 }
