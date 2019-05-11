@@ -26,7 +26,7 @@ export class MyApp {
               public menuCtrl: MenuController, public modalCtrl: ModalController) {
     //metemos esto aqui porque peta diciendo: Firebase: No Firebase App '[DEFAULT]' has been created
     //asi que volvemos a inicializarlo.
-    firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig.firebase);
     // observable para cambios en el estado de la autenticacion del usuario
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       //console.log(firebase.auth().currentUser.uid);

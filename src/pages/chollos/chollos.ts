@@ -4,8 +4,8 @@ import { UploadPage } from "../upload/upload";
 import { ChollosProvider } from "../../providers/chollos/chollos"
 import {CholloDetailPage} from "../chollo-detail/chollo-detail";
 import {AuthenticationProvider} from "../../providers/authentication/authentication";
-
-
+import * as _ from 'lodash';
+import {Likes} from "../../models/likes";
 
 
 /**
@@ -24,6 +24,7 @@ export class ChollosPage {
 
   chollitos : any = [];
   name : any;
+  private likes : any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public loadingController: LoadingController,
@@ -38,6 +39,10 @@ export class ChollosPage {
 
   ionViewWillEnter() {
     this.getOffers();
+  }
+
+  updateLikes(){
+
   }
 
   //Devuelve todas las ofertas que se encuentran en firebase.
@@ -61,13 +66,14 @@ export class ChollosPage {
                   url: snapshot[k].url,
                   date: snapshot[k].date,
                   userID: snapshot[k].userID,
+                  photoID: snapshot[k].photo,
                   userName: value
                 }
               );
           })
         }
-
       })
+      .then( _.orderBy(this.chollitos, [this.chollitos.date]))
       .then(() => loader.dismiss());
   }
 

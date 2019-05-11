@@ -5,4 +5,6 @@ export interface Chollo{
   url: string;
   date: string;
   userID: string;
+  photo: string;
+  popu: any;
 }

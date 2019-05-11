@@ -28,6 +28,11 @@ import {MyOffersPage} from "../pages/my-offers/my-offers";
 import {UserProfilePageModule} from "../pages/user-profile/user-profile.module";
 import {MyOffersPageModule} from "../pages/my-offers/my-offers.module";
 
+//Cloudinary
+import { FileUploadModule } from 'ng2-file-upload';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
+
 
 
 
@@ -50,9 +55,13 @@ import {MyOffersPageModule} from "../pages/my-offers/my-offers.module";
     HttpClientModule,
     UserProfilePageModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    Ng2CloudinaryModule,
-    MyOffersPageModule
+    AngularFireModule.initializeApp(firebaseConfig.firebase),
+    MyOffersPageModule,
+    FileUploadModule,
+    CloudinaryModule,
+    [
+      CloudinaryModule.forRoot({Cloudinary}, { cloud_name: firebaseConfig.cloudinary.cloud_name } as CloudinaryConfiguration),
+    ]
   ],
   bootstrap: [IonicApp],
   entryComponents: [

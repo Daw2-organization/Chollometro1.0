@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content padding>
-    <form [formGroup]="uploadForm" (submit)="uploadChollo(chollo)" novalidate>
+    <form [formGroup]="uploadForm" (submit)="uploadImage(chollo)" novalidate>
       <ion-item>
         <ion-label color="primary" floating>Title</ion-label>
         <ion-input formControlName="title" type="text" [(ngModel)]="chollo.title" [class.invalid]="uploadForm.controls.title.valid && blur"></ion-input>
@@ -27,11 +27,13 @@
         <ion-input formControlName="url" type="text" [(ngModel)]="chollo.url" [class.invalid]="uploadForm.controls.url.valid && blur"></ion-input>
       </ion-item>
 
-      <ion-row>
-        <ion-item>
-          <button ion-button round default color="primary"><ion-icon name="images"></ion-icon></button>
-        </ion-item>
-      </ion-row>
+      <ion-item>
+        <ion-icon name="camera" item-start></ion-icon>
+        <cl-image *ngIf="public_id != null" [public-id]="public_id">
+        </cl-image>
+        <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera">
+      </ion-item>
+
 
       <br>
 

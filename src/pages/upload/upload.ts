@@ -7,6 +7,11 @@ import { ProfileProvider } from "../../providers/profile/profile";
 import * as firebase from 'firebase';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
+//Cloudinary
+import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
+import {firebaseConfig} from "../../app/firebase.config";
+
+
 
 
 /**
@@ -24,7 +29,16 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class UploadPage {
 
     public chollo = {} as Chollo;
-  public uploadForm: FormGroup;
+    public uploadForm: FormGroup;
+    private UserPhoto : any;
+    private public_id;
+
+    uploader: CloudinaryUploader = new CloudinaryUploader(
+      new CloudinaryOptions({
+        cloudName: firebaseConfig.cloudinary.cloud_name,
+        uploadPreset: firebaseConfig.cloudinary.upload_preset
+      })
+    );
 
 
   constructor(private ChollosProv: ChollosProvider, public navCtrl: NavController,
@@ -48,13 +62,26 @@ export class UploadPage {
 
 
     //Sube un chollo a firebase
-   uploadChollo(chollo: Chollo){
+   uploadChollo(chollo : Chollo){
     console.log("CholloUpload", this.chollo)
     chollo.userID = firebase.auth().currentUser.uid;
     chollo.date = new Date().toLocaleDateString();
+    chollo.photo = this.UserPhoto;
     this.ChollosProv.uploadChollo(chollo);
     this.mostrarConfirmacion();
     this.navCtrl.pop();
+  }
+
+  uploadImage(chollo : Chollo){
+    if(this.uploader.queue.length) {
+      this.uploader.uploadAll();
+      this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
+        let res: any = JSON.parse(response);
+        console.log(res);
+        this.UserPhoto = res.public_id;
+        this.uploadChollo(chollo);
+      };
+    }
   }
 
     //Muestra confirmación de que se ha subido correctamente el chollo

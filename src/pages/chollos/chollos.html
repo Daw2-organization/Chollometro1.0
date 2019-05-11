@@ -22,7 +22,7 @@
   </ion-refresher>
 
   <ion-card class="ayy" *ngFor="let chollo of chollitos">
-    <ion-card-content (click)="goToCholloDetails(chollo.id)">
+    <ion-card-content (click)="goToCholloDetails(chollo?.id)">
       <ion-item>
         <ion-avatar item-left>
           <img src="../../assets/imgs/user.png">
@@ -32,7 +32,10 @@
           {{chollo?.date}}
         </ion-row>
       </ion-item>
-      <img src="../../assets/imgs/offer.jpg"/>
+        <ion-item>
+          <cl-image *ngIf="chollo?.photoID != null" public-id="{{chollo?.photoID}}">
+          </cl-image>
+        </ion-item>
       <ion-card-title>
         {{chollo?.title}}
       </ion-card-title>
